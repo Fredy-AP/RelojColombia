@@ -1,197 +1,256 @@
 <!DOCTYPE html>
 <html lang="es">
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2339538708404792"
-     crossorigin="anonymous"></script>
-<head>
-   <link rel="icon" type="image/png" href="https://img.freepik.com/vector-premium/icono-linea-reloj-inteligente-resistente-al-agua_116137-8060.jpg">
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Reloj + Cronometro</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background-image: url('https://wallpapers.com/images/featured/fondods-de-fresas-c1sfg4na1l2eoikp.jpg');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      display: flex;
-      height: 100vh;
-      overflow: hidden;
-    }
-
-    .sidebar {
-      width: 200px;
-      background: #d9006c;
-      color: white;
-      display: flex;
-      flex-direction: column;
-      padding-top: 30px;
-    }
-
-    .sidebar button {
-      background: none;
-      border: none;
-      color: white;
-      padding: 20px;
-      text-align: left;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-
-    .sidebar button:hover, .sidebar button.active {
-      background: #b10056;
-    }
-
-    .content {
-      flex: 1;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .card {
-      background-color: rgba(255, 255, 255, 0.9);
-      padding: 40px;
-      border-radius: 20px;
-      text-align: center;
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
-      min-width: 300px;
-      max-width: 90vw;
-    }
-
-    h1 {
-      color: #d9006c;
-      text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
-    }
-
-    .time, .stopwatch {
-      font-size: 3rem;
-      margin: 20px 0;
-      color: #d9006c;
-    }
-
-    button.crono-btn {
-      background-color: #d9006c;
-      border: none;
-      padding: 10px 20px;
-      color: white;
-      margin: 5px;
-      border-radius: 10px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    button.crono-btn:hover {
-      background-color: #a00050;
-    }
-
-    @media (max-width: 768px) {
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reloj + Cronómetro + Pomodoro</title>
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://img.freepik.com/vector-premium/icono-linea-reloj-inteligente-resistente-al-agua_116137-8060.jpg"
+    />
+    <style>
       body {
-        flex-direction: column;
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-image: url("https://wallpapers.com/images/featured/fondods-de-fresas-c1sfg4na1l2eoikp.jpg");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        display: flex;
+        height: 100vh;
+        overflow: hidden;
       }
+
       .sidebar {
-        flex-direction: row;
-        width: 100%;
-        justify-content: space-around;
-        padding: 0;
+        width: 200px;
+        background: #d9006c;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        padding-top: 30px;
       }
+
       .sidebar button {
-        flex: 1;
-        padding: 15px;
-        font-size: 0.9rem;
+        background: none;
+        border: none;
+        color: white;
+        padding: 20px;
+        text-align: left;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background 0.3s;
       }
-    }
-  </style>
-</head>
-<body>
-  <div class="sidebar">
-    <button class="tab-btn active" onclick="mostrar('reloj', event)">🕒 Reloj</button>
-    <button class="tab-btn" onclick="mostrar('cronometro', event)">⏱️ Cronómetro</button>
-  </div>
 
-  <div class="content">
-    <div class="card">
-      <div id="reloj">
-        <h1>Hora exacta en Bogotá</h1>
-        <div id="hora" class="time">00:00:00</div>
-        <div id="fecha">Cargando fecha...</div>
-      </div>
+      .sidebar button:hover,
+      .sidebar button.active {
+        background: #b10056;
+      }
 
-      <div id="cronometro" style="display:none;">
-        <h1>Cronómetro</h1>
-        <div id="crono" class="stopwatch">00:00:00</div>
-        <div>
-          <button class="crono-btn" onclick="iniciarCrono()">Iniciar</button>
-          <button class="crono-btn" onclick="pausarCrono()">Pausar</button>
-          <button class="crono-btn" onclick="reiniciarCrono()">Reiniciar</button>
+      .content {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .card {
+        background-color: rgba(255, 255, 255, 0.9);
+        padding: 40px;
+        border-radius: 20px;
+        text-align: center;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+        min-width: 300px;
+        max-width: 90vw;
+      }
+
+      h1 {
+        color: #d9006c;
+        text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+      }
+
+      .time,
+      .stopwatch,
+      .pomodoro {
+        font-size: 3rem;
+        margin: 20px 0;
+        color: #d9006c;
+      }
+
+      button.crono-btn {
+        background-color: #d9006c;
+        border: none;
+        padding: 10px 20px;
+        color: white;
+        margin: 5px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-weight: bold;
+      }
+
+      button.crono-btn:hover {
+        background-color: #a00050;
+      }
+
+      @media (max-width: 768px) {
+        body {
+          flex-direction: column;
+        }
+        .sidebar {
+          flex-direction: row;
+          width: 100%;
+          justify-content: space-around;
+          padding: 0;
+        }
+        .sidebar button {
+          flex: 1;
+          padding: 15px;
+          font-size: 0.9rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="sidebar">
+      <button class="tab-btn active" onclick="mostrar('reloj', event)">
+        🕒 Reloj
+      </button>
+      <button class="tab-btn" onclick="mostrar('cronometro', event)">
+        ⏱️ Cronómetro
+      </button>
+      <button class="tab-btn" onclick="mostrar('pomodoro', event)">
+        🍅 Pomodoro
+      </button>
+    </div>
+
+    <div class="content">
+      <div class="card">
+        <!-- Reloj -->
+        <div id="reloj">
+          <h1>Hora exacta en Bogotá</h1>
+          <div id="hora" class="time">00:00:00</div>
+          <div id="fecha">Cargando fecha...</div>
+        </div>
+
+        <!-- Cronómetro -->
+        <div id="cronometro" style="display: none">
+          <h1>Cronómetro</h1>
+          <div id="crono" class="stopwatch">00:00:00</div>
+          <div>
+            <button class="crono-btn" onclick="iniciarCrono()">Iniciar</button>
+            <button class="crono-btn" onclick="pausarCrono()">Pausar</button>
+            <button class="crono-btn" onclick="reiniciarCrono()">
+              Reiniciar
+            </button>
+          </div>
+        </div>
+
+        <!-- Pomodoro -->
+        <div id="pomodoro" style="display: none">
+          <h1>Temporizador Pomodoro</h1>
+          <div id="pomotime" class="pomodoro">25:00</div>
+          <div>
+            <button class="crono-btn" onclick="iniciarPomo()">Iniciar</button>
+            <button class="crono-btn" onclick="pausarPomo()">Pausar</button>
+            <button class="crono-btn" onclick="reiniciarPomo()">
+              Reiniciar
+            </button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <script>
-    // Reloj
-    function actualizarHora() {
-      const now = new Date();
-      const h = String(now.getHours()).padStart(2, '0');
-      const m = String(now.getMinutes()).padStart(2, '0');
-      const s = String(now.getSeconds()).padStart(2, '0');
-      document.getElementById('hora').textContent = `${h}:${m}:${s}`;
+    <audio
+      id="sonidoFin"
+      src="./sound.mp3"
+      preload="auto"
+    ></audio>
 
-      const dias = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
-      const meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio',
-        'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
-      const dia = dias[now.getDay()];
-      const fecha = `${dia}, ${now.getDate()} de ${meses[now.getMonth()]} de ${now.getFullYear()}`;
-      document.getElementById('fecha').textContent = fecha;
-    }
-    setInterval(actualizarHora, 1000);
-    actualizarHora();
-
-    // Cronómetro
-    let tiempo = 0;
-    let corriendo = false;
-    let intervalo;
-
-    function actualizarCrono() {
-      const h = String(Math.floor(tiempo / 3600)).padStart(2, '0');
-      const m = String(Math.floor((tiempo % 3600) / 60)).padStart(2, '0');
-      const s = String(tiempo % 60).padStart(2, '0');
-      document.getElementById('crono').textContent = `${h}:${m}:${s}`;
-    }
-
-    function iniciarCrono() {
-      if (!corriendo) {
-        intervalo = setInterval(() => {
-          tiempo++;
-          actualizarCrono();
-        }, 1000);
-        corriendo = true;
+    <script>
+      function reiniciarPomo() {
+        clearInterval(pomoIntervalo);
+        pomoIntervalo = null;
+        localStorage.removeItem("pomodoroData");
+        document.getElementById("pomotime").textContent = "25:00";
       }
-    }
 
-    function pausarCrono() {
-      clearInterval(intervalo);
-      corriendo = false;
-    }
+      // Función para cambiar de pestaña
+      function mostrar(id, e) {
+        document.getElementById("reloj").style.display = "none";
+        document.getElementById("cronometro").style.display = "none";
+        document.getElementById("pomodoro").style.display = "none";
+        document.getElementById(id).style.display = "block";
 
-    function reiniciarCrono() {
-      pausarCrono();
-      tiempo = 0;
-      actualizarCrono();
-    }
+        document
+          .querySelectorAll(".tab-btn")
+          .forEach((btn) => btn.classList.remove("active"));
+        e.target.classList.add("active");
+      }
 
-    // Cambiar pestañas
-    function mostrar(id, e) {
-      document.getElementById('reloj').style.display = 'none';
-      document.getElementById('cronometro').style.display = 'none';
-      document.getElementById(id).style.display = 'block';
+      // Pomodoro con persistencia
+      let pomoIntervalo;
+      const duracionPomodoro = 25 * 60;
 
-      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-      e.target.classList.add('active');
-    }
-  </script>
-</body>
+      function actualizarPomo() {
+        const data = JSON.parse(localStorage.getItem("pomodoroData"));
+        if (!data || !data.inicio || data.terminado) {
+          document.getElementById("pomotime").textContent = "25:00";
+          return;
+        }
+
+        const ahora = Math.floor(Date.now() / 1000);
+        const restante = data.inicio + duracionPomodoro - ahora;
+
+        if (restante <= 0) {
+          document.getElementById("pomotime").textContent = "00:00";
+          document.getElementById("sonidoFin").play();
+          localStorage.setItem(
+            "pomodoroData",
+            JSON.stringify({ terminado: true })
+          );
+          clearInterval(pomoIntervalo);
+        } else {
+          const m = String(Math.floor(restante / 60)).padStart(2, "0");
+          const s = String(restante % 60).padStart(2, "0");
+          document.getElementById("pomotime").textContent = `${m}:${s}`;
+        }
+      }
+
+      function iniciarPomo() {
+        const data = JSON.parse(localStorage.getItem("pomodoroData"));
+        if (!data || data.terminado || !data.inicio) {
+          const inicio = Math.floor(Date.now() / 1000);
+          localStorage.setItem(
+            "pomodoroData",
+            JSON.stringify({ inicio, terminado: false })
+          );
+        }
+        if (!pomoIntervalo) {
+          pomoIntervalo = setInterval(actualizarPomo, 1000);
+        }
+      }
+
+      function pausarPomo() {
+        clearInterval(pomoIntervalo);
+        pomoIntervalo = null;
+      }
+
+      function reiniciarPomo() {
+        clearInterval(pomoIntervalo);
+        pomoIntervalo = null;
+        localStorage.removeItem("pomodoroData");
+        document.getElementById("pomotime").textContent = "25:00";
+      }
+
+      // Al cargar la página, si hay Pomodoro activo, seguir contando
+      window.addEventListener("load", () => {
+        const data = JSON.parse(localStorage.getItem("pomodoroData"));
+        if (data && data.inicio && !data.terminado) {
+          pomoIntervalo = setInterval(actualizarPomo, 1000);
+        } else {
+          document.getElementById("pomotime").textContent = "25:00";
+        }
+      });
+    </script>
+  </body>
 </html>
