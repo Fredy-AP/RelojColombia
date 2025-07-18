@@ -167,6 +167,22 @@
     ></audio>
 
     <script>
+      // Función para actualizar el reloj
+      function actualizarReloj() {
+        const ahora = new Date();
+        const hora = String(ahora.getHours()).padStart(2, "0");
+        const minutos = String(ahora.getMinutes()).padStart(2, "0");
+        const segundos = String(ahora.getSeconds()).padStart(2, "0");
+        document.getElementById("hora").textContent = `${hora}:${minutos}:${segundos}`;
+        
+        const opciones = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        document.getElementById("fecha").textContent = ahora.toLocaleDateString('es-CO', opciones);
+      }
+
+      // Iniciar el reloj
+      setInterval(actualizarReloj, 1000);
+      actualizarReloj();
+
       function reiniciarPomo() {
         clearInterval(pomoIntervalo);
         pomoIntervalo = null;
