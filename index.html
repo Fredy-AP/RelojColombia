@@ -8,105 +8,105 @@
     <title>Reloj + Cronómetro + Pomodoro</title>
    
     <style>
-      body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-        background-image: url("https://wallpapers.com/images/featured/fondods-de-fresas-c1sfg4na1l2eoikp.jpg");
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        display: flex;
-        height: 100vh;
-        overflow: hidden;
-      }
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #2c3e50, #4b6584); /* Fondo sobrio */
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+  }
 
-      .sidebar {
-        width: 200px;
-        background: #d9006c;
-        color: white;
-        display: flex;
-        flex-direction: column;
-        padding-top: 30px;
-      }
+  .sidebar {
+    width: 200px;
+    background: #2f3542;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    padding-top: 30px;
+  }
 
-      .sidebar button {
-        background: none;
-        border: none;
-        color: white;
-        padding: 20px;
-        text-align: left;
-        font-size: 1rem;
-        cursor: pointer;
-        transition: background 0.3s;
-      }
+  .sidebar button {
+    background: none;
+    border: none;
+    color: white;
+    padding: 20px;
+    text-align: left;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
 
-      .sidebar button:hover,
-      .sidebar button.active {
-        background: #b10056;
-      }
+  .sidebar button:hover,
+  .sidebar button.active {
+    background: #57606f;
+  }
 
-      .content {
-        flex: 1;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
+  .content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
-      .card {
-        background-color: rgba(255, 255, 255, 0.9);
-        padding: 40px;
-        border-radius: 20px;
-        text-align: center;
-        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
-        min-width: 300px;
-        max-width: 90vw;
-      }
+  .card {
+    background-color: rgba(255, 255, 255, 0.92);
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+    min-width: 300px;
+    max-width: 90vw;
+  }
 
-      h1 {
-        color: #d9006c;
-        text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
-      }
+  h1 {
+    color: #2c3e50;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+  }
 
-      .time,
-      .stopwatch,
-      .pomodoro {
-        font-size: 3rem;
-        margin: 20px 0;
-        color: #d9006c;
-      }
+  .time,
+  .stopwatch,
+  .pomodoro {
+    font-size: 3rem;
+    margin: 20px 0;
+    color: #2c3e50;
+  }
 
-      button.crono-btn {
-        background-color: #d9006c;
-        border: none;
-        padding: 10px 20px;
-        color: white;
-        margin: 5px;
-        border-radius: 10px;
-        cursor: pointer;
-        font-weight: bold;
-      }
+  button.crono-btn {
+    background-color: #2c3e50;
+    border: none;
+    padding: 10px 20px;
+    color: white;
+    margin: 5px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+  }
 
-      button.crono-btn:hover {
-        background-color: #a00050;
-      }
+  button.crono-btn:hover {
+    background-color: #1e272e;
+  }
 
-      @media (max-width: 768px) {
-        body {
-          flex-direction: column;
-        }
-        .sidebar {
-          flex-direction: row;
-          width: 100%;
-          justify-content: space-around;
-          padding: 0;
-        }
-        .sidebar button {
-          flex: 1;
-          padding: 15px;
-          font-size: 0.9rem;
-        }
-      }
-    </style>
+  @media (max-width: 768px) {
+    body {
+      flex-direction: column;
+    }
+
+    .sidebar {
+      flex-direction: row;
+      width: 100%;
+      justify-content: space-around;
+      padding: 0;
+    }
+
+    .sidebar button {
+      flex: 1;
+      padding: 15px;
+      font-size: 0.9rem;
+    }
+  }
+</style>
+
   </head>
   <body>
     <div class="sidebar">
