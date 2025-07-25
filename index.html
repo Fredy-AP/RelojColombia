@@ -293,11 +293,10 @@
 
       const frasesCronometro = [
         "Rápido como un colibrí 🐦",
-        "Veloz como Rigoberto Urán 🚴‍♂️",
+        "Veloz como Nairo Quintana 🚴‍♂️",
         "Ágil como una cumbia 💃",
         "Preciso como un esmeraldero 💎",
         "Exacto como un reloj suizo... ¡pero colombiano! 🇨🇴"
-        "Bonito como el archipielago de San Andres y Providencia"
       ];
 
       const frasesPomodoro = [
@@ -315,20 +314,28 @@
 
       // Función para actualizar el reloj
       function actualizarReloj() {
-        const ahora = new Date();
-        const hora = String(ahora.getHours()).padStart(2, "0");
-        const minutos = String(ahora.getMinutes()).padStart(2, "0");
-        const segundos = String(ahora.getSeconds()).padStart(2, "0");
-        document.getElementById("hora").textContent = `${hora}:${minutos}:${segundos}`;
-        
-        const opciones = { 
-          weekday: 'long', 
-          year: 'numeric', 
-          month: 'long', 
-          day: 'numeric',
-          timeZone: 'America/Bogota'
-        };
-        document.getElementById("fecha").textContent = ahora.toLocaleDateString('es-CO', opciones);
+        try {
+          const ahora = new Date();
+          const hora = String(ahora.getHours()).padStart(2, "0");
+          const minutos = String(ahora.getMinutes()).padStart(2, "0");
+          const segundos = String(ahora.getSeconds()).padStart(2, "0");
+          document.getElementById("hora").textContent = `${hora}:${minutos}:${segundos}`;
+          
+          // Configuración más simple para la fecha
+          const dias = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
+          const meses = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 
+                        'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+          
+          const diaSemana = dias[ahora.getDay()];
+          const dia = ahora.getDate();
+          const mes = meses[ahora.getMonth()];
+          const año = ahora.getFullYear();
+          
+          document.getElementById("fecha").textContent = `${diaSemana}, ${dia} de ${mes} de ${año}`;
+        } catch (error) {
+          console.error("Error actualizando reloj:", error);
+          document.getElementById("fecha").textContent = "Fecha no disponible";
+        }
       }
 
       // Iniciar el reloj
