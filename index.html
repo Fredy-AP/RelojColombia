@@ -5,41 +5,71 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="google-site-verification" content="cMOoUROhn7Uq5w3eBLIrILo_laS2lOnrBRTghfljJZQ" />
-    <title>Reloj + Cronómetro + Pomodoro</title>
+    <title>Reloj Colombia 🇨🇴 | Cronómetro + Pomodoro</title>
    
     <style>
   body {
     margin: 0;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(to right, #2c3e50, #4b6584); /* Fondo sobrio */
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #ffcc02, #ce1126, #003087); /* Colores de Colombia */
+    background-size: 400% 400%;
+    animation: gradientShift 8s ease infinite;
     display: flex;
     height: 100vh;
     overflow: hidden;
   }
 
+  @keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
   .sidebar {
-    width: 200px;
-    background: #2f3542;
+    width: 220px;
+    background: rgba(0, 48, 135, 0.95); /* Azul Colombia */
     color: white;
     display: flex;
     flex-direction: column;
-    padding-top: 30px;
+    padding-top: 20px;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.3);
+  }
+
+  .colombia-header {
+    text-align: center;
+    padding: 15px;
+    border-bottom: 2px solid #ffcc02;
+    margin-bottom: 10px;
+  }
+
+  .colombia-header h2 {
+    margin: 5px 0;
+    font-size: 1.1rem;
+    color: #ffcc02;
   }
 
   .sidebar button {
     background: none;
     border: none;
     color: white;
-    padding: 20px;
+    padding: 18px 20px;
     text-align: left;
     font-size: 1rem;
     cursor: pointer;
-    transition: background 0.3s;
+    transition: all 0.3s ease;
+    border-left: 3px solid transparent;
   }
 
-  .sidebar button:hover,
+  .sidebar button:hover {
+    background: rgba(255, 204, 2, 0.2);
+    border-left: 3px solid #ffcc02;
+    transform: translateX(5px);
+  }
+
   .sidebar button.active {
-    background: #57606f;
+    background: rgba(255, 204, 2, 0.3);
+    border-left: 3px solid #ffcc02;
+    font-weight: bold;
   }
 
   .content {
@@ -47,44 +77,105 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 20px;
   }
 
   .card {
-    background-color: rgba(255, 255, 255, 0.92);
+    background: rgba(255, 255, 255, 0.95);
     padding: 40px;
-    border-radius: 20px;
+    border-radius: 25px;
     text-align: center;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
-    min-width: 300px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    min-width: 350px;
     max-width: 90vw;
+    border: 3px solid #ffcc02;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, #ffcc02, #ce1126, #003087, #ffcc02);
+    border-radius: 25px;
+    z-index: -1;
+    animation: borderGlow 3s linear infinite;
+  }
+
+  @keyframes borderGlow {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
   }
 
   h1 {
-    color: #2c3e50;
-    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+    color: #003087;
+    text-shadow: 2px 2px 4px rgba(206, 17, 38, 0.3);
+    margin-bottom: 10px;
+  }
+
+  .colombia-info {
+    font-size: 0.9rem;
+    color: #ce1126;
+    margin-bottom: 20px;
+    font-style: italic;
   }
 
   .time,
   .stopwatch,
   .pomodoro {
-    font-size: 3rem;
-    margin: 20px 0;
-    color: #2c3e50;
+    font-size: 3.5rem;
+    margin: 25px 0;
+    color: #003087;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    font-family: 'Courier New', monospace;
+    background: linear-gradient(45deg, #003087, #ce1126);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
   button.crono-btn {
-    background-color: #2c3e50;
+    background: linear-gradient(45deg, #ce1126, #003087);
     border: none;
-    padding: 10px 20px;
+    padding: 12px 25px;
     color: white;
-    margin: 5px;
-    border-radius: 10px;
+    margin: 8px;
+    border-radius: 25px;
     cursor: pointer;
     font-weight: bold;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
   }
 
   button.crono-btn:hover {
-    background-color: #1e272e;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    background: linear-gradient(45deg, #ffcc02, #ce1126);
+  }
+
+  button.crono-btn:active {
+    transform: translateY(0);
+  }
+
+  .cultural-element {
+    margin-top: 20px;
+    padding: 15px;
+    background: rgba(255, 204, 2, 0.1);
+    border-radius: 15px;
+    border: 1px solid #ffcc02;
+  }
+
+  .frases-colombia {
+    font-size: 0.9rem;
+    color: #003087;
+    font-style: italic;
+    margin: 10px 0;
   }
 
   @media (max-width: 768px) {
@@ -99,10 +190,24 @@
       padding: 0;
     }
 
+    .colombia-header {
+      display: none;
+    }
+
     .sidebar button {
       flex: 1;
-      padding: 15px;
-      font-size: 0.9rem;
+      padding: 15px 5px;
+      font-size: 0.8rem;
+      text-align: center;
+    }
+
+    .card {
+      min-width: 280px;
+      padding: 25px;
+    }
+
+    .time, .stopwatch, .pomodoro {
+      font-size: 2.5rem;
     }
   }
 </style>
@@ -110,8 +215,12 @@
   </head>
   <body>
     <div class="sidebar">
+      <div class="colombia-header">
+        <h2>🇨🇴 COLOMBIA 🇨🇴</h2>
+        <div style="font-size: 0.8rem;">Tierra querida</div>
+      </div>
       <button class="tab-btn active" onclick="mostrar('reloj', event)">
-        🕒 Reloj
+        🕒 Reloj Bogotá
       </button>
       <button class="tab-btn" onclick="mostrar('cronometro', event)">
         ⏱️ Cronómetro
@@ -125,46 +234,84 @@
       <div class="card">
         <!-- Reloj -->
         <div id="reloj">
-          <h1>Hora exacta en Bogotá</h1>
+          <h1>🇨🇴 Hora en Colombia 🇨🇴</h1>
+          <div class="colombia-info">Zona horaria: COT (UTC-5)</div>
           <div id="hora" class="time">00:00:00</div>
           <div id="fecha">Cargando fecha...</div>
+          <div class="cultural-element">
+            <div class="frases-colombia" id="fraseColombiana">
+              "El tiempo es oro, como el café colombiano ☕"
+            </div>
+          </div>
         </div>
 
         <!-- Cronómetro -->
         <div id="cronometro" style="display: none">
-          <h1>Cronómetro</h1>
+          <h1>⏱️ Cronómetro Colombiano</h1>
+          <div class="colombia-info">¡Mide tu tiempo con sabor a Colombia!</div>
           <div id="crono" class="stopwatch">00:00:00</div>
           <div>
-            <button class="crono-btn" onclick="iniciarCrono()">Iniciar</button>
-            <button class="crono-btn" onclick="pausarCrono()">Pausar</button>
-            <button class="crono-btn" onclick="reiniciarCrono()">
-              Reiniciar
-            </button>
+            <button class="crono-btn" onclick="iniciarCrono()">🚀 Iniciar</button>
+            <button class="crono-btn" onclick="pausarCrono()">⏸️ Pausar</button>
+            <button class="crono-btn" onclick="reiniciarCrono()">🔄 Reiniciar</button>
+          </div>
+          <div class="cultural-element">
+            <div class="frases-colombia" id="fraseCronometro">
+              "Rápido como un colibrí 🐦"
+            </div>
           </div>
         </div>
 
         <!-- Pomodoro -->
         <div id="pomodoro" style="display: none">
-          <h1>Temporizador Pomodoro</h1>
+          <h1>🍅 Pomodoro Colombiano</h1>
+          <div class="colombia-info">Productividad con ritmo vallenato 🎵</div>
           <div id="pomotime" class="pomodoro">25:00</div>
           <div>
-            <button class="crono-btn" onclick="iniciarPomo()">Iniciar</button>
-            <button class="crono-btn" onclick="pausarPomo()">Pausar</button>
-            <button class="crono-btn" onclick="reiniciarPomo()">
-              Reiniciar
-            </button>
+            <button class="crono-btn" onclick="iniciarPomo()">🎯 Iniciar</button>
+            <button class="crono-btn" onclick="pausarPomo()">⏸️ Pausar</button>
+            <button class="crono-btn" onclick="reiniciarPomo()">🔄 Reiniciar</button>
+          </div>
+          <div class="cultural-element">
+            <div class="frases-colombia" id="frasePomodoro">
+              "Trabajar duro como un caficultor ☕🌱"
+            </div>
           </div>
         </div>
       </div>
     </div>
 
-    <audio
-      id="sonidoFin"
-      src="./sound.mp3"
-      preload="auto"
-    ></audio>
-
     <script>
+      // Frases colombianas
+      const frasesReloj = [
+        "El tiempo es oro, como el café colombiano ☕",
+        "Puntual como el metro de Medellín 🚇",
+        "El tiempo vuela como un cóndor 🦅",
+        "Hora colombiana, siempre presente 🇨🇴",
+        "El tiempo es sagrado, como el Magdalena 🏞️"
+      ];
+
+      const frasesCronometro = [
+        "Rápido como un colibrí 🐦",
+        "Veloz como Nairo Quintana 🚴‍♂️",
+        "Ágil como una cumbia 💃",
+        "Preciso como un esmeraldero 💎",
+        "Exacto como un reloj suizo... ¡pero colombiano! 🇨🇴"
+      ];
+
+      const frasesPomodoro = [
+        "Trabajar duro como un caficultor ☕🌱",
+        "Concentrado como un jugador de tejo 🎯",
+        "Enfocado como García Márquez escribiendo 📚",
+        "Productivo como las tierras del Valle 🌾",
+        "Constante como el río Magdalena 🏞️"
+      ];
+
+      // Variables del cronómetro
+      let cronoIntervalo;
+      let cronoTiempo = 0; // en segundos
+      let cronoActivo = false;
+
       // Función para actualizar el reloj
       function actualizarReloj() {
         const ahora = new Date();
@@ -173,7 +320,13 @@
         const segundos = String(ahora.getSeconds()).padStart(2, "0");
         document.getElementById("hora").textContent = `${hora}:${minutos}:${segundos}`;
         
-        const opciones = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        const opciones = { 
+          weekday: 'long', 
+          year: 'numeric', 
+          month: 'long', 
+          day: 'numeric',
+          timeZone: 'America/Bogota'
+        };
         document.getElementById("fecha").textContent = ahora.toLocaleDateString('es-CO', opciones);
       }
 
@@ -181,12 +334,61 @@
       setInterval(actualizarReloj, 1000);
       actualizarReloj();
 
-      function reiniciarPomo() {
-        clearInterval(pomoIntervalo);
-        pomoIntervalo = null;
-        localStorage.removeItem("pomodoroData");
-        document.getElementById("pomotime").textContent = "25:00";
+      // Funciones del cronómetro
+      function actualizarDisplayCrono() {
+        const horas = Math.floor(cronoTiempo / 3600);
+        const minutos = Math.floor((cronoTiempo % 3600) / 60);
+        const segundos = cronoTiempo % 60;
+        
+        const horasStr = String(horas).padStart(2, "0");
+        const minutosStr = String(minutos).padStart(2, "0");
+        const segundosStr = String(segundos).padStart(2, "0");
+        
+        document.getElementById("crono").textContent = `${horasStr}:${minutosStr}:${segundosStr}`;
       }
+
+      function iniciarCrono() {
+        if (!cronoActivo) {
+          cronoActivo = true;
+          cronoIntervalo = setInterval(() => {
+            cronoTiempo++;
+            actualizarDisplayCrono();
+          }, 1000);
+        }
+      }
+
+      function pausarCrono() {
+        if (cronoActivo) {
+          cronoActivo = false;
+          clearInterval(cronoIntervalo);
+        }
+      }
+
+      function reiniciarCrono() {
+        cronoActivo = false;
+        clearInterval(cronoIntervalo);
+        cronoTiempo = 0;
+        actualizarDisplayCrono();
+      }
+
+      // Función para cambiar frases culturales
+      function cambiarFrase() {
+        const seccionActual = document.querySelector('[style*="block"]')?.id || 'reloj';
+        
+        if (seccionActual === 'reloj') {
+          const fraseAleatoria = frasesReloj[Math.floor(Math.random() * frasesReloj.length)];
+          document.getElementById("fraseColombiana").textContent = fraseAleatoria;
+        } else if (seccionActual === 'cronometro') {
+          const fraseAleatoria = frasesCronometro[Math.floor(Math.random() * frasesCronometro.length)];
+          document.getElementById("fraseCronometro").textContent = fraseAleatoria;
+        } else if (seccionActual === 'pomodoro') {
+          const fraseAleatoria = frasesPomodoro[Math.floor(Math.random() * frasesPomodoro.length)];
+          document.getElementById("frasePomodoro").textContent = fraseAleatoria;
+        }
+      }
+
+      // Cambiar frases cada 10 segundos
+      setInterval(cambiarFrase, 10000);
 
       // Función para cambiar de pestaña
       function mostrar(id, e) {
@@ -199,9 +401,12 @@
           .querySelectorAll(".tab-btn")
           .forEach((btn) => btn.classList.remove("active"));
         e.target.classList.add("active");
+
+        // Cambiar frase al cambiar de sección
+        setTimeout(cambiarFrase, 500);
       }
 
-      // Pomodoro con persistencia
+      // Pomodoro con persistencia (manteniendo tu código original)
       let pomoIntervalo;
       const duracionPomodoro = 25 * 60;
 
@@ -217,12 +422,29 @@
 
         if (restante <= 0) {
           document.getElementById("pomotime").textContent = "00:00";
-          document.getElementById("sonidoFin").play();
-          localStorage.setItem(
-            "pomodoroData",
-            JSON.stringify({ terminado: true })
-          );
+          // Crear sonido de notificación personalizado
+          const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+          const oscillator = audioContext.createOscillator();
+          const gainNode = audioContext.createGain();
+          
+          oscillator.connect(gainNode);
+          gainNode.connect(audioContext.destination);
+          
+          oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
+          oscillator.frequency.setValueAtTime(600, audioContext.currentTime + 0.1);
+          oscillator.frequency.setValueAtTime(800, audioContext.currentTime + 0.2);
+          
+          gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+          gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+          
+          oscillator.start(audioContext.currentTime);
+          oscillator.stop(audioContext.currentTime + 0.3);
+          
+          localStorage.setItem("pomodoroData", JSON.stringify({ terminado: true }));
           clearInterval(pomoIntervalo);
+          
+          // Mostrar mensaje colombiano
+          alert("¡Pomodoro terminado! 🎉 ¡Descansa como un buen colombiano! ☕");
         } else {
           const m = String(Math.floor(restante / 60)).padStart(2, "0");
           const s = String(restante % 60).padStart(2, "0");
@@ -234,10 +456,7 @@
         const data = JSON.parse(localStorage.getItem("pomodoroData"));
         if (!data || data.terminado || !data.inicio) {
           const inicio = Math.floor(Date.now() / 1000);
-          localStorage.setItem(
-            "pomodoroData",
-            JSON.stringify({ inicio, terminado: false })
-          );
+          localStorage.setItem("pomodoroData", JSON.stringify({ inicio, terminado: false }));
         }
         if (!pomoIntervalo) {
           pomoIntervalo = setInterval(actualizarPomo, 1000);
@@ -256,7 +475,7 @@
         document.getElementById("pomotime").textContent = "25:00";
       }
 
-      // Al cargar la página, si hay Pomodoro activo, seguir contando
+      // Al cargar la página
       window.addEventListener("load", () => {
         const data = JSON.parse(localStorage.getItem("pomodoroData"));
         if (data && data.inicio && !data.terminado) {
@@ -264,6 +483,12 @@
         } else {
           document.getElementById("pomotime").textContent = "25:00";
         }
+        
+        // Inicializar cronómetro
+        actualizarDisplayCrono();
+        
+        // Mostrar primera frase
+        setTimeout(cambiarFrase, 1000);
       });
     </script>
   </body>
