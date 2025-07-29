@@ -1,505 +1,224 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <link rel="icon" type="image/png" href="favicon.png">
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="google-site-verification" content="cMOoUROhn7Uq5w3eBLIrILo_laS2lOnrBRTghfljJZQ" />
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2339538708404792"
-     crossorigin="anonymous"></script>
-    <title>Reloj Colombia 🇨🇴 | Cronómetro + Pomodoro</title>
-    
-   
-    <style>
-  body {
-    margin: 0;
-    font-family: 'Arial', sans-serif;
-    background: linear-gradient(135deg, #ffcc02, #ce1126, #003087); /* Colores de Colombia */
-    background-size: 400% 400%;
-    animation: gradientShift 8s ease infinite;
-    display: flex;
-    height: 100vh;
-    overflow: hidden;
-  }
-
-  @keyframes gradientShift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
-
-  .sidebar {
-    width: 220px;
-    background: rgba(0, 48, 135, 0.95); /* Azul Colombia */
-    color: white;
-    display: flex;
-    flex-direction: column;
-    padding-top: 20px;
-    box-shadow: 2px 0 10px rgba(0,0,0,0.3);
-  }
-
-  .colombia-header {
-    text-align: center;
-    padding: 15px;
-    border-bottom: 2px solid #ffcc02;
-    margin-bottom: 10px;
-  }
-
-  .colombia-header h2 {
-    margin: 5px 0;
-    font-size: 1.1rem;
-    color: #ffcc02;
-  }
-
-  .sidebar button {
-    background: none;
-    border: none;
-    color: white;
-    padding: 18px 20px;
-    text-align: left;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    border-left: 3px solid transparent;
-  }
-
-  .sidebar button:hover {
-    background: rgba(255, 204, 2, 0.2);
-    border-left: 3px solid #ffcc02;
-    transform: translateX(5px);
-  }
-
-  .sidebar button.active {
-    background: rgba(255, 204, 2, 0.3);
-    border-left: 3px solid #ffcc02;
-    font-weight: bold;
-  }
-
-  .content {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-  }
-
-  .card {
-    background: rgba(255, 255, 255, 0.95);
-    padding: 40px;
-    border-radius: 25px;
-    text-align: center;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
-    min-width: 350px;
-    max-width: 90vw;
-    border: 3px solid #ffcc02;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .card::before {
-    content: '';
-    position: absolute;
-    top: -2px;
-    left: -2px;
-    right: -2px;
-    bottom: -2px;
-    background: linear-gradient(45deg, #ffcc02, #ce1126, #003087, #ffcc02);
-    border-radius: 25px;
-    z-index: -1;
-    animation: borderGlow 3s linear infinite;
-  }
-
-  @keyframes borderGlow {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
-
-  h1 {
-    color: #003087;
-    text-shadow: 2px 2px 4px rgba(206, 17, 38, 0.3);
-    margin-bottom: 10px;
-  }
-
-  .colombia-info {
-    font-size: 0.9rem;
-    color: #ce1126;
-    margin-bottom: 20px;
-    font-style: italic;
-  }
-
-  .time,
-  .stopwatch,
-  .pomodoro {
-    font-size: 3.5rem;
-    margin: 25px 0;
-    color: #003087;
-    font-weight: bold;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-    font-family: 'Courier New', monospace;
-    background: linear-gradient(45deg, #003087, #ce1126);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  button.crono-btn {
-    background: linear-gradient(45deg, #ce1126, #003087);
-    border: none;
-    padding: 12px 25px;
-    color: white;
-    margin: 8px;
-    border-radius: 25px;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-  }
-
-  button.crono-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-    background: linear-gradient(45deg, #ffcc02, #ce1126);
-  }
-
-  button.crono-btn:active {
-    transform: translateY(0);
-  }
-
-  .cultural-element {
-    margin-top: 20px;
-    padding: 15px;
-    background: rgba(255, 204, 2, 0.1);
-    border-radius: 15px;
-    border: 1px solid #ffcc02;
-  }
-
-  .frases-colombia {
-    font-size: 0.9rem;
-    color: #003087;
-    font-style: italic;
-    margin: 10px 0;
-  }
-
-  @media (max-width: 768px) {
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reloj Productivo - Cronómetro y Pomodoro</title>
+  <style>
     body {
-      flex-direction: column;
-    }
-
-    .sidebar {
-      flex-direction: row;
-      width: 100%;
-      justify-content: space-around;
+      background-color: #111;
+      color: white;
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
       padding: 0;
-    }
-
-    .colombia-header {
-      display: none;
-    }
-
-    .sidebar button {
-      flex: 1;
-      padding: 15px 5px;
-      font-size: 0.8rem;
       text-align: center;
     }
 
-    .card {
-      min-width: 280px;
-      padding: 25px;
+    header {
+      padding: 2rem 1rem;
+      background-color: #222;
+      box-shadow: 0 2px 5px #000;
     }
 
-    .time, .stopwatch, .pomodoro {
+    header h1 {
       font-size: 2.5rem;
     }
-  }
-</style>
 
-  </head>
-  <body>
-    <div class="sidebar">
-      <div class="colombia-header">
-        <h2>🇨🇴 COLOMBIA 🇨🇴</h2>
-        <div style="font-size: 0.8rem;">Tierra querida</div>
+    header p {
+      font-size: 1.1rem;
+      color: #ccc;
+    }
+
+    .tools {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+      margin: 2rem auto;
+      max-width: 800px;
+    }
+
+    .tools div {
+      background: #333;
+      padding: 1.5rem;
+      border-radius: 10px;
+      width: 90%;
+      box-shadow: 0 0 10px #000;
+    }
+
+    .tools h2 {
+      margin-bottom: 1rem;
+      color: #00ffcc;
+    }
+
+    #clock, #stopwatch, #pomodoro {
+      font-size: 2.5rem;
+      margin: 1rem 0;
+    }
+
+    button {
+      margin: 0.2rem;
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 8px;
+      background-color: #00bfa6;
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #009e8e;
+    }
+
+    .info {
+      padding: 2rem;
+      text-align: left;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    .info h2, .info h3 {
+      color: #00ffcc;
+    }
+
+    .info ul {
+      list-style: circle;
+      padding-left: 2rem;
+    }
+
+    footer {
+      padding: 1rem;
+      background: #222;
+      color: #999;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>⏰ Reloj Productivo</h1>
+    <p>Usa herramientas simples para enfocarte mejor cada día</p>
+  </header>
+
+  <main>
+    <section class="tools">
+      <div class="reloj">
+        <h2>Hora actual</h2>
+        <p id="clock">--:--:--</p>
       </div>
-      <button class="tab-btn active" onclick="mostrar('reloj', event)">
-        🕒 Reloj Bogotá
-      </button>
-      <button class="tab-btn" onclick="mostrar('cronometro', event)">
-        ⏱️ Cronómetro
-      </button>
-      <button class="tab-btn" onclick="mostrar('pomodoro', event)">
-        🍅 Pomodoro
-      </button>
-    </div>
 
-    <div class="content">
-      <div class="card">
-        <!-- Reloj -->
-        <div id="reloj">
-          <h1>🇨🇴 Hora en Colombia 🇨🇴</h1>
-          <div class="colombia-info">Zona horaria: COT (UTC-5)</div>
-          <div id="hora" class="time">00:00:00</div>
-          <div id="fecha">Cargando fecha...</div>
-          <div class="cultural-element">
-            <div class="frases-colombia" id="fraseColombiana">
-              "El tiempo es oro, como el café colombiano ☕"
-            </div>
-          </div>
-        </div>
-
-        <!-- Cronómetro -->
-        <div id="cronometro" style="display: none">
-          <h1>⏱️ Cronómetro Colombiano</h1>
-          <div class="colombia-info">¡Mide tu tiempo con sabor a Colombia!</div>
-          <div id="crono" class="stopwatch">00:00:00</div>
-          <div>
-            <button class="crono-btn" onclick="iniciarCrono()">🚀 Iniciar</button>
-            <button class="crono-btn" onclick="pausarCrono()">⏸️ Pausar</button>
-            <button class="crono-btn" onclick="reiniciarCrono()">🔄 Reiniciar</button>
-          </div>
-          <div class="cultural-element">
-            <div class="frases-colombia" id="fraseCronometro">
-              "Rápido como un colibrí 🐦"
-            </div>
-          </div>
-        </div>
-
-        <!-- Pomodoro -->
-        <div id="pomodoro" style="display: none">
-          <h1>🍅 Pomodoro Colombiano</h1>
-          <div class="colombia-info">Productividad con ritmo vallenato 🎵</div>
-          <div id="pomotime" class="pomodoro">25:00</div>
-          <div>
-            <button class="crono-btn" onclick="iniciarPomo()">🎯 Iniciar</button>
-            <button class="crono-btn" onclick="pausarPomo()">⏸️ Pausar</button>
-            <button class="crono-btn" onclick="reiniciarPomo()">🔄 Reiniciar</button>
-          </div>
-          <div class="cultural-element">
-            <div class="frases-colombia" id="frasePomodoro">
-              "Trabajar duro como un caficultor ☕🌱"
-            </div>
-          </div>
-        </div>
+      <div class="cronometro">
+        <h2>Cronómetro</h2>
+        <p id="stopwatch">00:00:00</p>
+        <button onclick="startStopwatch()">Iniciar</button>
+        <button onclick="stopStopwatch()">Detener</button>
+        <button onclick="resetStopwatch()">Reiniciar</button>
       </div>
-    </div>
 
-    <script>
-      // Frases colombianas
-      const frasesReloj = [
-        "El tiempo es oro, como el café colombiano ☕",
-        "Puntual como el metro de Medellín 🚇",
-        "El tiempo vuela como un cóndor 🦅",
-        "Hora colombiana, siempre presente 🇨🇴",
-        "El tiempo es sagrado, como el Magdalena 🏞️"
-      ];
+      <div class="pomodoro">
+        <h2>Temporizador Pomodoro</h2>
+        <p id="pomodoro">25:00</p>
+        <button onclick="startPomodoro()">Iniciar</button>
+        <button onclick="resetPomodoro()">Reiniciar</button>
+      </div>
+    </section>
 
-      const frasesCronometro = [
-        "Rápido como un colibrí 🐦",
-        "Veloz como Ciclista Colombiano 🚴‍♂️",
-        "Ágil como una cumbia 💃",
-        "Preciso como un esmeraldero 💎",
-        "Exacto como un reloj suizo... ¡pero colombiano! 🇨🇴"
-      ];
+    <section class="info">
+      <h2>¿Qué es el método Pomodoro?</h2>
+      <p>El método Pomodoro es una técnica para mejorar tu productividad. Consiste en trabajar por 25 minutos y descansar 5 minutos. Estos ciclos ayudan a mantener el enfoque y la energía.</p>
 
-      const frasesPomodoro = [
-        "Trabajar duro como un caficultor ☕🌱",
-        "Concentrado como un jugador de tejo 🎯",
-        "Productivo como las tierras del Valle 🌾",
-        "Constante como el río Magdalena 🏞️"
-      ];
+      <h3>Consejos para trabajar mejor</h3>
+      <ul>
+        <li>Establece metas diarias.</li>
+        <li>Elimina distracciones durante los bloques de trabajo.</li>
+        <li>Utiliza descansos para relajarte o caminar un poco.</li>
+      </ul>
 
-      // Variables del cronómetro
-      let cronoIntervalo;
-      let cronoTiempo = 0; // en segundos
-      let cronoActivo = false;
+      <h3>Acerca del sitio</h3>
+      <p>Este sitio fue creado por Fredy para ayudar a las personas a organizar su tiempo de forma efectiva. Puedes usar el reloj, cronómetro o temporizador Pomodoro según tu necesidad diaria.</p>
+    </section>
+  </main>
 
-      // Función para actualizar el reloj
-      function actualizarReloj() {
-        try {
-          const ahora = new Date();
-          const hora = String(ahora.getHours()).padStart(2, "0");
-          const minutos = String(ahora.getMinutes()).padStart(2, "0");
-          const segundos = String(ahora.getSeconds()).padStart(2, "0");
-          document.getElementById("hora").textContent = `${hora}:${minutos}:${segundos}`;
-          
-          // Configuración más simple para la fecha
-          const dias = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
-          const meses = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 
-                        'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
-          
-          const diaSemana = dias[ahora.getDay()];
-          const dia = ahora.getDate();
-          const mes = meses[ahora.getMonth()];
-          const año = ahora.getFullYear();
-          
-          document.getElementById("fecha").textContent = `${diaSemana}, ${dia} de ${mes} de ${año}`;
-        } catch (error) {
-          console.error("Error actualizando reloj:", error);
-          document.getElementById("fecha").textContent = "Fecha no disponible";
-        }
+  <footer>
+    <p>© 2025 Reloj Productivo - Fredy Pelaez</p>
+  </footer>
+
+  <script>
+    // Reloj
+    function updateClock() {
+      const now = new Date();
+      const time = now.toLocaleTimeString();
+      document.getElementById('clock').textContent = time;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // Cronómetro
+    let stopwatchInterval;
+    let stopwatchTime = 0;
+
+    function updateStopwatch() {
+      const hours = String(Math.floor(stopwatchTime / 3600)).padStart(2, '0');
+      const minutes = String(Math.floor((stopwatchTime % 3600) / 60)).padStart(2, '0');
+      const seconds = String(stopwatchTime % 60).padStart(2, '0');
+      document.getElementById('stopwatch').textContent = `${hours}:${minutes}:${seconds}`;
+    }
+
+    function startStopwatch() {
+      if (!stopwatchInterval) {
+        stopwatchInterval = setInterval(() => {
+          stopwatchTime++;
+          updateStopwatch();
+        }, 1000);
       }
+    }
 
-      // Iniciar el reloj
-      setInterval(actualizarReloj, 1000);
-      actualizarReloj();
+    function stopStopwatch() {
+      clearInterval(stopwatchInterval);
+      stopwatchInterval = null;
+    }
 
-      // Funciones del cronómetro
-      function actualizarDisplayCrono() {
-        const horas = Math.floor(cronoTiempo / 3600);
-        const minutos = Math.floor((cronoTiempo % 3600) / 60);
-        const segundos = cronoTiempo % 60;
-        
-        const horasStr = String(horas).padStart(2, "0");
-        const minutosStr = String(minutos).padStart(2, "0");
-        const segundosStr = String(segundos).padStart(2, "0");
-        
-        document.getElementById("crono").textContent = `${horasStr}:${minutosStr}:${segundosStr}`;
+    function resetStopwatch() {
+      stopwatchTime = 0;
+      updateStopwatch();
+      stopStopwatch();
+    }
+
+    // Pomodoro
+    let pomodoroTime = 1500; // 25 minutos
+    let pomodoroInterval;
+
+    function updatePomodoro() {
+      const minutes = String(Math.floor(pomodoroTime / 60)).padStart(2, '0');
+      const seconds = String(pomodoroTime % 60).padStart(2, '0');
+      document.getElementById('pomodoro').textContent = `${minutes}:${seconds}`;
+    }
+
+    function startPomodoro() {
+      if (!pomodoroInterval) {
+        pomodoroInterval = setInterval(() => {
+          if (pomodoroTime > 0) {
+            pomodoroTime--;
+            updatePomodoro();
+          } else {
+            clearInterval(pomodoroInterval);
+            pomodoroInterval = null;
+            alert("¡Tiempo terminado! Toma un descanso.");
+          }
+        }, 1000);
       }
+    }
 
-      function iniciarCrono() {
-        if (!cronoActivo) {
-          cronoActivo = true;
-          cronoIntervalo = setInterval(() => {
-            cronoTiempo++;
-            actualizarDisplayCrono();
-          }, 1000);
-        }
-      }
+    function resetPomodoro() {
+      pomodoroTime = 1500;
+      updatePomodoro();
+      clearInterval(pomodoroInterval);
+      pomodoroInterval = null;
+    }
 
-      function pausarCrono() {
-        if (cronoActivo) {
-          cronoActivo = false;
-          clearInterval(cronoIntervalo);
-        }
-      }
-
-      function reiniciarCrono() {
-        cronoActivo = false;
-        clearInterval(cronoIntervalo);
-        cronoTiempo = 0;
-        actualizarDisplayCrono();
-      }
-
-      // Función para cambiar frases culturales
-      function cambiarFrase() {
-        const seccionActual = document.querySelector('[style*="block"]')?.id || 'reloj';
-        
-        if (seccionActual === 'reloj') {
-          const fraseAleatoria = frasesReloj[Math.floor(Math.random() * frasesReloj.length)];
-          document.getElementById("fraseColombiana").textContent = fraseAleatoria;
-        } else if (seccionActual === 'cronometro') {
-          const fraseAleatoria = frasesCronometro[Math.floor(Math.random() * frasesCronometro.length)];
-          document.getElementById("fraseCronometro").textContent = fraseAleatoria;
-        } else if (seccionActual === 'pomodoro') {
-          const fraseAleatoria = frasesPomodoro[Math.floor(Math.random() * frasesPomodoro.length)];
-          document.getElementById("frasePomodoro").textContent = fraseAleatoria;
-        }
-      }
-
-      // Cambiar frases cada 10 segundos
-      setInterval(cambiarFrase, 10000);
-
-      // Función para cambiar de pestaña
-      function mostrar(id, e) {
-        document.getElementById("reloj").style.display = "none";
-        document.getElementById("cronometro").style.display = "none";
-        document.getElementById("pomodoro").style.display = "none";
-        document.getElementById(id).style.display = "block";
-
-        document
-          .querySelectorAll(".tab-btn")
-          .forEach((btn) => btn.classList.remove("active"));
-        e.target.classList.add("active");
-
-        // Cambiar frase al cambiar de sección
-        setTimeout(cambiarFrase, 500);
-      }
-
-      // Pomodoro con persistencia (manteniendo tu código original)
-      let pomoIntervalo;
-      const duracionPomodoro = 25 * 60;
-
-      function actualizarPomo() {
-        const data = JSON.parse(localStorage.getItem("pomodoroData"));
-        if (!data || !data.inicio || data.terminado) {
-          document.getElementById("pomotime").textContent = "25:00";
-          return;
-        }
-
-        const ahora = Math.floor(Date.now() / 1000);
-        const restante = data.inicio + duracionPomodoro - ahora;
-
-        if (restante <= 0) {
-          document.getElementById("pomotime").textContent = "00:00";
-          // Crear sonido de notificación personalizado
-          const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-          const oscillator = audioContext.createOscillator();
-          const gainNode = audioContext.createGain();
-          
-          oscillator.connect(gainNode);
-          gainNode.connect(audioContext.destination);
-          
-          oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
-          oscillator.frequency.setValueAtTime(600, audioContext.currentTime + 0.1);
-          oscillator.frequency.setValueAtTime(800, audioContext.currentTime + 0.2);
-          
-          gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
-          gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
-          
-          oscillator.start(audioContext.currentTime);
-          oscillator.stop(audioContext.currentTime + 0.3);
-          
-          localStorage.setItem("pomodoroData", JSON.stringify({ terminado: true }));
-          clearInterval(pomoIntervalo);
-          
-          // Mostrar mensaje colombiano
-          alert("¡Pomodoro terminado! 🎉 ¡Descansa como un buen colombiano! ☕");
-        } else {
-          const m = String(Math.floor(restante / 60)).padStart(2, "0");
-          const s = String(restante % 60).padStart(2, "0");
-          document.getElementById("pomotime").textContent = `${m}:${s}`;
-        }
-      }
-
-      function iniciarPomo() {
-        const data = JSON.parse(localStorage.getItem("pomodoroData"));
-        if (!data || data.terminado || !data.inicio) {
-          const inicio = Math.floor(Date.now() / 1000);
-          localStorage.setItem("pomodoroData", JSON.stringify({ inicio, terminado: false }));
-        }
-        if (!pomoIntervalo) {
-          pomoIntervalo = setInterval(actualizarPomo, 1000);
-        }
-      }
-
-      function pausarPomo() {
-        clearInterval(pomoIntervalo);
-        pomoIntervalo = null;
-      }
-
-      function reiniciarPomo() {
-        clearInterval(pomoIntervalo);
-        pomoIntervalo = null;
-        localStorage.removeItem("pomodoroData");
-        document.getElementById("pomotime").textContent = "25:00";
-      }
-
-      // Al cargar la página
-      window.addEventListener("load", () => {
-        const data = JSON.parse(localStorage.getItem("pomodoroData"));
-        if (data && data.inicio && !data.terminado) {
-          pomoIntervalo = setInterval(actualizarPomo, 1000);
-        } else {
-          document.getElementById("pomotime").textContent = "25:00";
-        }
-        
-        // Inicializar cronómetro
-        actualizarDisplayCrono();
-        
-        // Mostrar primera frase
-        setTimeout(cambiarFrase, 1000);
-      });
-    </script>
-  </body>
+    updateStopwatch();
+    updatePomodoro();
+  </script>
+</body>
 </html>
+
