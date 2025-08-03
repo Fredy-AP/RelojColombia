@@ -50,32 +50,22 @@
       text-decoration: underline;
     }
 
-    .tools {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 2rem;
-      margin: 2rem auto;
-      max-width: 900px;
-    }
-
-    .tools div {
-      background: #1a1a1a;
+    .tools, .info, .legal, .contacto {
       padding: 2rem;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .tools div, .legal, .contacto {
+      background: #1a1a1a;
+      margin-bottom: 2rem;
       border-radius: 20px;
-      width: 90%;
-      box-shadow: 0 0 20px rgba(0, 255, 204, 0.1);
-      transition: transform 0.3s ease;
+      padding: 2rem;
+      box-shadow: 0 0 20px rgba(0, 255, 204, 0.05);
     }
 
-    .tools div:hover {
-      transform: translateY(-5px);
-    }
-
-    .tools h2 {
-      margin-bottom: 1rem;
+    h2, h3 {
       color: #00ffd5;
-      font-size: 1.8rem;
     }
 
     #clock, #stopwatch, #pomodoro {
@@ -102,48 +92,35 @@
       transform: scale(1.05);
     }
 
-    .info {
-      padding: 2.5rem;
+    ul {
       text-align: left;
-      max-width: 900px;
-      margin: auto;
-      background: #1a1a1a;
-      border-radius: 16px;
-      box-shadow: 0 0 15px rgba(0, 255, 204, 0.05);
-    }
-
-    .info h2, .info h3 {
-      color: #00ffcc;
-      margin-bottom: 0.5rem;
-    }
-
-    .info p {
-      color: #cccccc;
-      line-height: 1.6;
-    }
-
-    .info ul {
-      list-style: disc;
-      padding-left: 2rem;
       color: #bbbbbb;
     }
 
     footer {
-      padding: 1.5rem;
+      padding: 2rem 1rem;
       background: #111;
       color: #777;
       font-size: 0.9rem;
-      margin-top: 3rem;
     }
 
-    footer a {
-      color: #00ffe1;
-      text-decoration: none;
-      margin: 0 0.5rem;
+    label, input, textarea {
+      display: block;
+      width: 100%;
+      margin-top: 1rem;
+      padding: 0.7rem;
+      border-radius: 8px;
+      border: none;
+      background: #2c2c2c;
+      color: #fff;
     }
 
-    footer a:hover {
-      text-decoration: underline;
+    textarea {
+      resize: none;
+    }
+
+    input:disabled, textarea:disabled {
+      background: #333;
     }
   </style>
 </head>
@@ -158,16 +135,19 @@
     <a href="#cronometro">Cronómetro</a>
     <a href="#pomodoro">Pomodoro</a>
     <a href="#info">Información</a>
+    <a href="#privacidad">Privacidad</a>
+    <a href="#terminos">Términos</a>
+    <a href="#contacto">Contacto</a>
   </nav>
 
   <main>
     <section class="tools">
-      <div class="reloj" id="reloj">
+      <div id="reloj">
         <h2>Hora actual</h2>
         <p id="clock">--:--:--</p>
       </div>
 
-      <div class="cronometro" id="cronometro">
+      <div id="cronometro">
         <h2>Cronómetro</h2>
         <p id="stopwatch">00:00:00</p>
         <button onclick="startStopwatch()">Iniciar</button>
@@ -175,7 +155,7 @@
         <button onclick="resetStopwatch()">Reiniciar</button>
       </div>
 
-      <div class="pomodoro" id="pomodoro">
+      <div id="pomodoro">
         <h2>Temporizador Pomodoro</h2>
         <p id="pomodoro">25:00</p>
         <button onclick="startPomodoro()">Iniciar</button>
@@ -193,23 +173,48 @@
         <li>Elimina distracciones durante los bloques de trabajo.</li>
         <li>Utiliza descansos para relajarte o caminar un poco.</li>
       </ul>
+    </section>
 
-      <h3>Acerca del sitio</h3>
-      <p>Este sitio fue creado para ayudar a las personas a organizar su tiempo de forma efectiva. Puedes usar el reloj, cronómetro o temporizador Pomodoro según tu necesidad diaria.</p>
+    <section class="legal" id="privacidad">
+      <h2>Política de Privacidad</h2>
+      <p>No recopilamos datos personales directamente. Sin embargo, servicios como Google AdSense pueden usar cookies para mostrar anuncios relevantes.</p>
+      <p>Utilizamos cookies para mejorar la experiencia del usuario. Puedes desactivarlas desde la configuración de tu navegador.</p>
+      <p>Este sitio puede contener enlaces a otros sitios. No somos responsables de sus políticas de privacidad.</p>
+      <p>Al usar nuestro sitio, aceptas esta política de privacidad.</p>
+    </section>
+
+    <section class="legal" id="terminos">
+      <h2>Términos y Condiciones</h2>
+      <p>Este sitio proporciona herramientas gratuitas como reloj, cronómetro y temporizador Pomodoro para uso personal.</p>
+      <p>Al acceder a este sitio, aceptas utilizarlo de manera responsable y sin violar ninguna ley.</p>
+      <p>No garantizamos que las herramientas estén libres de errores ni que siempre estén disponibles.</p>
+      <p>Nos reservamos el derecho de modificar estos términos en cualquier momento sin previo aviso.</p>
+    </section>
+
+    <section class="contacto" id="contacto">
+      <h2>Contacto</h2>
+      <p>Para dudas o sugerencias, escribe a: <strong>fredy113@gmail.com</strong></p>
+      <p>Este formulario es ilustrativo. Para contactarnos, usa el correo mencionado arriba.</p>
+      <form>
+        <label for="nombre">Nombre</label>
+        <input type="text" id="nombre" placeholder="Tu nombre" disabled>
+
+        <label for="email">Correo electrónico</label>
+        <input type="email" id="email" placeholder="tucorreo@ejemplo.com" disabled>
+
+        <label for="mensaje">Mensaje</label>
+        <textarea id="mensaje" rows="5" placeholder="Tu mensaje aquí..." disabled></textarea>
+
+        <button type="submit" disabled>Enviar</button>
+      </form>
     </section>
   </main>
 
   <footer>
-    <p>© 2025 Reloj Productivo</p>
-    <p>
-      <a href="privacidad.html">Política de privacidad</a> |
-      <a href="terminos.html">Términos y condiciones</a> |
-      <a href="contacto.html">Contacto</a>
-    </p>
+    <p>© 2025 Reloj Productivo | Fredy Peláez</p>
   </footer>
 
   <script>
-    // Reloj
     function updateClock() {
       const now = new Date();
       const time = now.toLocaleTimeString();
@@ -218,7 +223,6 @@
     setInterval(updateClock, 1000);
     updateClock();
 
-    // Cronómetro
     let stopwatchInterval;
     let stopwatchTime = 0;
 
@@ -249,8 +253,7 @@
       stopStopwatch();
     }
 
-    // Pomodoro
-    let pomodoroTime = 1500; // 25 minutos
+    let pomodoroTime = 1500;
     let pomodoroInterval;
 
     function updatePomodoro() {
