@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Cronómetro y temporizador Pomodoro gratuito en línea para mejorar tu productividad.">
+  <meta name="keywords" content="reloj, cronómetro, pomodoro, productividad, enfocar, estudiar">
+  <meta name="author" content="Fredy Peláez">
   <title>Reloj Productivo - Cronómetro y Pomodoro</title>
   <style>
     body {
@@ -29,6 +32,22 @@
     header p {
       font-size: 1.2rem;
       color: #bbbbbb;
+    }
+
+    nav {
+      padding: 1rem;
+      background: #111;
+    }
+
+    nav a {
+      margin: 0 1rem;
+      color: #00ffe1;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
     }
 
     .tools {
@@ -110,11 +129,21 @@
     }
 
     footer {
-      padding: 1rem;
+      padding: 1.5rem;
       background: #111;
       color: #777;
       font-size: 0.9rem;
       margin-top: 3rem;
+    }
+
+    footer a {
+      color: #00ffe1;
+      text-decoration: none;
+      margin: 0 0.5rem;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
@@ -124,14 +153,21 @@
     <p>Usa herramientas simples para enfocarte mejor cada día</p>
   </header>
 
+  <nav>
+    <a href="#reloj">Reloj</a>
+    <a href="#cronometro">Cronómetro</a>
+    <a href="#pomodoro">Pomodoro</a>
+    <a href="#info">Información</a>
+  </nav>
+
   <main>
     <section class="tools">
-      <div class="reloj">
+      <div class="reloj" id="reloj">
         <h2>Hora actual</h2>
         <p id="clock">--:--:--</p>
       </div>
 
-      <div class="cronometro">
+      <div class="cronometro" id="cronometro">
         <h2>Cronómetro</h2>
         <p id="stopwatch">00:00:00</p>
         <button onclick="startStopwatch()">Iniciar</button>
@@ -139,7 +175,7 @@
         <button onclick="resetStopwatch()">Reiniciar</button>
       </div>
 
-      <div class="pomodoro">
+      <div class="pomodoro" id="pomodoro">
         <h2>Temporizador Pomodoro</h2>
         <p id="pomodoro">25:00</p>
         <button onclick="startPomodoro()">Iniciar</button>
@@ -147,7 +183,7 @@
       </div>
     </section>
 
-    <section class="info">
+    <section class="info" id="info">
       <h2>¿Qué es el método Pomodoro?</h2>
       <p>El método Pomodoro es una técnica para mejorar tu productividad. Consiste en trabajar por 25 minutos y descansar 5 minutos. Estos ciclos ayudan a mantener el enfoque y la energía.</p>
 
@@ -165,6 +201,11 @@
 
   <footer>
     <p>© 2025 Reloj Productivo</p>
+    <p>
+      <a href="privacidad.html">Política de privacidad</a> |
+      <a href="terminos.html">Términos y condiciones</a> |
+      <a href="contacto.html">Contacto</a>
+    </p>
   </footer>
 
   <script>
@@ -245,4 +286,6 @@
   </script>
 </body>
 </html>
+
+
 
