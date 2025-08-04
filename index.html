@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Cronómetro y temporizador Pomodoro gratuito en línea para mejorar tu productividad.">
-  <meta name="keywords" content="reloj, cronómetro, pomodoro, productividad, enfocar, estudiar">
+  <meta name="description" content="Guía completa de productividad con cronómetro, temporizador Pomodoro, técnicas de estudio y consejos para mejorar tu rendimiento diario.">
+  <meta name="keywords" content="productividad, pomodoro, cronómetro, técnicas de estudio, gestión del tiempo, concentración, enfoque">
   <meta name="author" content="Fredy Peláez">
-  <title>Reloj Productivo - Cronómetro y Pomodoro</title>
+  <title>Guía Completa de Productividad - Técnicas, Herramientas y Consejos</title>
   <style>
     body {
       background-color: #0d0d0d;
@@ -14,13 +14,14 @@
       font-family: 'Segoe UI', Roboto, sans-serif;
       margin: 0;
       padding: 0;
-      text-align: center;
+      line-height: 1.6;
     }
 
     header {
       padding: 2rem 1rem;
       background: linear-gradient(135deg, #1f1f1f, #2c2c2c);
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+      text-align: center;
     }
 
     header h1 {
@@ -32,11 +33,17 @@
     header p {
       font-size: 1.2rem;
       color: #bbbbbb;
+      max-width: 600px;
+      margin: 0 auto;
     }
 
     nav {
       padding: 1rem;
       background: #111;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
 
     nav a {
@@ -44,35 +51,59 @@
       color: #00ffe1;
       text-decoration: none;
       font-weight: bold;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      transition: background-color 0.3s;
     }
 
     nav a:hover {
-      text-decoration: underline;
+      background-color: #00bfa6;
+      color: white;
     }
 
-    .tools, .info, .legal, .contacto {
+    .content-section {
       padding: 2rem;
-      max-width: 900px;
+      max-width: 1200px;
       margin: auto;
     }
 
-    .tools div, .legal, .contacto {
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .tool-card, .article-card, .legal-card {
       background: #1a1a1a;
-      margin-bottom: 2rem;
       border-radius: 20px;
       padding: 2rem;
       box-shadow: 0 0 20px rgba(0, 255, 204, 0.05);
     }
 
-    h2, h3 {
+    .article-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+
+    h1, h2, h3 {
       color: #00ffd5;
     }
 
-    #clock, #stopwatch, #pomodoro {
-      font-size: 3rem;
+    h2 {
+      border-bottom: 2px solid #00bfa6;
+      padding-bottom: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    #clock, #stopwatch, #pomodoro-display {
+      font-size: 2.5rem;
       font-weight: bold;
       margin: 1rem 0;
       color: #ffffff;
+      text-align: center;
     }
 
     button {
@@ -92,9 +123,54 @@
       transform: scale(1.05);
     }
 
-    ul {
-      text-align: left;
-      color: #bbbbbb;
+    .article-card {
+      transition: transform 0.3s ease;
+    }
+
+    .article-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .article-meta {
+      color: #888;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+
+    .read-time {
+      background: #00bfa6;
+      color: white;
+      padding: 0.2rem 0.5rem;
+      border-radius: 15px;
+      font-size: 0.8rem;
+    }
+
+    .tip-box {
+      background: linear-gradient(135deg, #2c2c2c, #3c3c3c);
+      border-left: 4px solid #00ffd5;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      border-radius: 0 10px 10px 0;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+
+    .stat-card {
+      background: #2c2c2c;
+      padding: 1.5rem;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #00ffe1;
     }
 
     footer {
@@ -102,6 +178,12 @@
       background: #111;
       color: #777;
       font-size: 0.9rem;
+      text-align: center;
+    }
+
+    .contact-form {
+      max-width: 600px;
+      margin: 0 auto;
     }
 
     label, input, textarea {
@@ -113,162 +195,438 @@
       border: none;
       background: #2c2c2c;
       color: #fff;
+      box-sizing: border-box;
     }
 
     textarea {
-      resize: none;
+      resize: vertical;
+      min-height: 120px;
     }
 
-    input:disabled, textarea:disabled {
-      background: #333;
+    .breadcrumb {
+      color: #888;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+
+    .breadcrumb a {
+      color: #00ffe1;
+      text-decoration: none;
+    }
+
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2rem;
+      }
+      
+      .content-section {
+        padding: 1rem;
+      }
+      
+      #clock, #stopwatch, #pomodoro-display {
+        font-size: 2rem;
+      }
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>⏰ Reloj Productivo</h1>
-    <p>Usa herramientas simples para enfocarte mejor cada día</p>
+    <h1>🚀 Guía Completa de Productividad</h1>
+    <p>Descubre técnicas comprobadas, herramientas efectivas y estrategias para maximizar tu rendimiento personal y profesional</p>
   </header>
 
   <nav>
-    <a href="#reloj">Reloj</a>
-    <a href="#cronometro">Cronómetro</a>
-    <a href="#pomodoro">Pomodoro</a>
-    <a href="#info">Información</a>
-    <a href="#privacidad">Privacidad</a>
-    <a href="#terminos">Términos</a>
+    <a href="#inicio">Inicio</a>
+    <a href="#herramientas">Herramientas</a>
+    <a href="#tecnicas">Técnicas</a>
+    <a href="#articulos">Artículos</a>
+    <a href="#consejos">Consejos</a>
     <a href="#contacto">Contacto</a>
+    <a href="#privacidad">Privacidad</a>
   </nav>
 
   <main>
-    <section class="tools">
-      <div id="reloj">
-        <h2>Hora actual</h2>
-        <p id="clock">--:--:--</p>
+    <!-- Herramientas Interactivas -->
+    <section class="content-section" id="herramientas">
+      <div class="breadcrumb">
+        <a href="#inicio">Inicio</a> > Herramientas de Productividad
+      </div>
+      
+      <h2>⚡ Herramientas de Productividad</h2>
+      <p>Utiliza estas herramientas gratuitas para mejorar tu gestión del tiempo y concentración:</p>
+      
+      <div class="tools-grid">
+        <div class="tool-card">
+          <h3>🕐 Reloj en Tiempo Real</h3>
+          <p id="clock">--:--:--</p>
+          <p>Mantén siempre visible la hora actual para gestionar mejor tu tiempo durante el día.</p>
+        </div>
+
+        <div class="tool-card">
+          <h3>⏱️ Cronómetro Profesional</h3>
+          <p id="stopwatch">00:00:00</p>
+          <div>
+            <button onclick="startStopwatch()">Iniciar</button>
+            <button onclick="stopStopwatch()">Detener</button>
+            <button onclick="resetStopwatch()">Reiniciar</button>
+          </div>
+          <p>Perfecto para medir el tiempo dedicado a tareas específicas y actividades de trabajo.</p>
+        </div>
+
+        <div class="tool-card">
+          <h3>🍅 Temporizador Pomodoro</h3>
+          <p id="pomodoro-display">25:00</p>
+          <div>
+            <button onclick="startPomodoro()">Iniciar Pomodoro</button>
+            <button onclick="resetPomodoro()">Reiniciar</button>
+          </div>
+          <p>La técnica más efectiva para mantener la concentración y evitar el agotamiento mental.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Técnicas de Productividad -->
+    <section class="content-section" id="tecnicas">
+      <h2>🎯 Técnicas de Productividad Comprobadas</h2>
+      
+      <div class="article-grid">
+        <div class="article-card">
+          <h3>La Técnica Pomodoro: Guía Completa</h3>
+          <div class="article-meta">
+            <span class="read-time">5 min lectura</span> • Publicado: Enero 2025
+          </div>
+          <p>La técnica Pomodoro, desarrollada por Francesco Cirillo en los años 80, es una metodología de gestión del tiempo que ha revolucionado la forma en que trabajamos.</p>
+          
+          <h4>¿Cómo funciona?</h4>
+          <p>El método se basa en dividir el trabajo en intervalos de 25 minutos (llamados "pomodoros"), seguidos de descansos cortos de 5 minutos. Después de 4 pomodoros, se toma un descanso más largo de 15-30 minutos.</p>
+          
+          <h4>Beneficios científicamente comprobados:</h4>
+          <ul>
+            <li><strong>Mejora la concentración:</strong> Los intervalos cortos mantienen la mente fresca</li>
+            <li><strong>Reduce la procrastinación:</strong> 25 minutos parecen manejables para cualquier tarea</li>
+            <li><strong>Aumenta la motivación:</strong> Cada pomodoro completado genera sensación de logro</li>
+            <li><strong>Combate el agotamiento:</strong> Los descansos regulares previenen la fatiga mental</li>
+          </ul>
+          
+          <div class="tip-box">
+            <strong>💡 Consejo Pro:</strong> Durante un pomodoro, si surge una idea o distracción, anótala rápidamente y continúa. Revisarás estas notas durante el descanso.
+          </div>
+        </div>
+
+        <div class="article-card">
+          <h3>Gestión del Tiempo: Matriz de Eisenhower</h3>
+          <div class="article-meta">
+            <span class="read-time">4 min lectura</span> • Publicado: Enero 2025
+          </div>
+          <p>Aprende a priorizar tareas usando la matriz que utilizaba el presidente Eisenhower para tomar decisiones importantes.</p>
+          
+          <h4>Los 4 Cuadrantes:</h4>
+          <ol>
+            <li><strong>Urgente e Importante:</strong> Hazlo inmediatamente</li>
+            <li><strong>Importante, no Urgente:</strong> Planifica para hacerlo</li>
+            <li><strong>Urgente, no Importante:</strong> Delega si es posible</li>
+            <li><strong>Ni Urgente ni Importante:</strong> Elimina de tu lista</li>
+          </ol>
+          
+          <p>Esta técnica te ayuda a enfocar tu energía en lo que realmente importa, evitando la trampa de estar siempre "ocupado" pero no productivo.</p>
+        </div>
+
+        <div class="article-card">
+          <h3>Técnica Getting Things Done (GTD)</h3>
+          <div class="article-meta">
+            <span class="read-time">6 min lectura</span> • Publicado: Enero 2025
+          </div>
+          <p>El sistema GTD de David Allen es una metodología completa para organizar tareas y proyectos de manera eficiente.</p>
+          
+          <h4>Los 5 Pasos del GTD:</h4>
+          <ol>
+            <li><strong>Capturar:</strong> Anota todo lo que requiere tu atención</li>
+            <li><strong>Clarificar:</strong> Define qué significa cada elemento y qué acción requiere</li>
+            <li><strong>Organizar:</strong> Clasifica según contexto y prioridad</li>
+            <li><strong>Reflexionar:</strong> Revisa regularmente tu sistema</li>
+            <li><strong>Comprometerse:</strong> Ejecuta con confianza</li>
+          </ol>
+          
+          <div class="tip-box">
+            <strong>🎯 Regla de los 2 minutos:</strong> Si algo toma menos de 2 minutos, hazlo inmediatamente en lugar de agregarlo a tu lista.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Artículos de Productividad -->
+    <section class="content-section" id="articulos">
+      <h2>📚 Artículos y Guías de Productividad</h2>
+      
+      <div class="article-grid">
+        <div class="article-card">
+          <h3>Cómo Crear el Espacio de Trabajo Perfecto</h3>
+          <div class="article-meta">
+            <span class="read-time">7 min lectura</span> • Productividad Espacial
+          </div>
+          <p>Tu entorno de trabajo tiene un impacto directo en tu productividad. Un espacio bien diseñado puede aumentar tu eficiencia hasta en un 40%.</p>
+          
+          <h4>Elementos Clave de un Espacio Productivo:</h4>
+          <ul>
+            <li><strong>Iluminación adecuada:</strong> Preferiblemente luz natural, complementada con luz artificial cálida</li>
+            <li><strong>Organización visual:</strong> Un escritorio limpio reduce el estrés y mejora la concentración</li>
+            <li><strong>Ergonomía:</strong> Silla y escritorio a la altura correcta previenen fatiga</li>
+            <li><strong>Plantas:</strong> Mejoran la calidad del aire y reducen el estrés</li>
+            <li><strong>Zona libre de distracciones:</strong> Minimiza elementos que desvíen tu atención</li>
+          </ul>
+          
+          <p>Invierte tiempo en diseñar tu espacio de trabajo. Los beneficios se multiplicarán día tras día.</p>
+        </div>
+
+        <div class="article-card">
+          <h3>Hábitos Matutinos de Personas Altamente Productivas</h3>
+          <div class="article-meta">
+            <span class="read-time">5 min lectura</span> • Rutinas de Éxito
+          </div>
+          <p>La forma en que comienzas tu día determina en gran medida tu productividad. Estos hábitos están respaldados por investigaciones y utilizados por líderes exitosos.</p>
+          
+          <h4>Rutina Matutina Efectiva:</h4>
+          <ol>
+            <li><strong>Despertar temprano (5:30-6:30 AM):</strong> Aprovecha las horas de mayor claridad mental</li>
+            <li><strong>Hidratación:</strong> Un vaso de agua activa tu metabolismo</li>
+            <li><strong>Ejercicio ligero:</strong> 10-15 minutos aumentan tu energía para todo el día</li>
+            <li><strong>Meditación o mindfulness:</strong> 5 minutos reducen el estrés y mejoran el enfoque</li>
+            <li><strong>Planificación del día:</strong> Define las 3 tareas más importantes</li>
+            <li><strong>Desayuno nutritivo:</strong> Combustible para tu cerebro</li>
+          </ol>
+          
+          <div class="tip-box">
+            <strong>⏰ Implementación gradual:</strong> No intentes cambiar todo de una vez. Agrega un hábito por semana hasta completar tu rutina ideal.
+          </div>
+        </div>
+
+        <div class="article-card">
+          <h3>Tecnología y Productividad: Apps Esenciales 2025</h3>
+          <div class="article-meta">
+            <span class="read-time">8 min lectura</span> • Herramientas Digitales
+          </div>
+          <p>La tecnología puede ser tu mayor aliada o tu peor enemiga en términos de productividad. Descubre las aplicaciones más efectivas del 2025.</p>
+          
+          <h4>Categorías de Apps Productivas:</h4>
+          
+          <h5>📋 Gestión de Tareas:</h5>
+          <ul>
+            <li><strong>Todoist:</strong> Perfecto para GTD y proyectos complejos</li>
+            <li><strong>Any.do:</strong> Interfaz simple y elegante</li>
+            <li><strong>Microsoft To Do:</strong> Integración perfecta con Office</li>
+          </ul>
+          
+          <h5>⏰ Gestión del Tiempo:</h5>
+          <ul>
+            <li><strong>Forest:</strong> Gamifica la técnica Pomodoro</li>
+            <li><strong>RescueTime:</strong> Analiza automáticamente tu tiempo</li>
+            <li><strong>Toggl:</strong> Seguimiento preciso de tiempo por proyecto</li>
+          </ul>
+          
+          <h5>📝 Toma de Notas:</h5>
+          <ul>
+            <li><strong>Notion:</strong> Base de datos personal todo-en-uno</li>
+            <li><strong>Obsidian:</strong> Conecta ideas mediante mapas mentales</li>
+            <li><strong>OneNote:</strong> Sincronización perfecta entre dispositivos</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Consejos y Trucos -->
+    <section class="content-section" id="consejos">
+      <h2>💡 Consejos y Trucos de Productividad</h2>
+      
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-number">25</div>
+          <p>minutos es la duración ideal de un bloque de trabajo enfocado</p>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">3</div>
+          <p>tareas importantes máximo por día para mantener el enfoque</p>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">90</div>
+          <p>segundos de respiración profunda para resetear la concentración</p>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">2</div>
+          <p>horas antes de dormir sin pantallas mejora el descanso</p>
+        </div>
       </div>
 
-      <div id="cronometro">
-        <h2>Cronómetro</h2>
-        <p id="stopwatch">00:00:00</p>
-        <button onclick="startStopwatch()">Iniciar</button>
-        <button onclick="stopStopwatch()">Detener</button>
-        <button onclick="resetStopwatch()">Reiniciar</button>
+      <div class="article-grid">
+        <div class="article-card">
+          <h3>🧠 Técnicas de Concentración Profunda</h3>
+          <p>La concentración profunda es una habilidad que se puede entrenar. Aquí tienes métodos efectivos:</p>
+          
+          <ul>
+            <li><strong>Técnica 20-20-20:</strong> Cada 20 minutos, mira algo a 20 metros durante 20 segundos</li>
+            <li><strong>Música binural:</strong> Frecuencias específicas pueden mejorar el enfoque</li>
+            <li><strong>Bloqueador de sitios web:</strong> Elimina tentaciones digitales durante el trabajo</li>
+            <li><strong>Método del papel en blanco:</strong> Anota distracciones sin dejar de trabajar</li>
+          </ul>
+          
+          <div class="tip-box">
+            <strong>🎯 Flujo de trabajo:</strong> Identifica tu horario de mayor energía mental y reserva las tareas más importantes para esas horas.
+          </div>
+        </div>
+
+        <div class="article-card">
+          <h3>⚡ Combatir la Procrastinación</h3>
+          <p>La procrastinación es el enemigo número uno de la productividad. Estrategias científicamente probadas:</p>
+          
+          <ul>
+            <li><strong>Regla del 5 minutos:</strong> Comprométete solo con 5 minutos de trabajo</li>
+            <li><strong>Técnica del queso suizo:</strong> Trabaja en partes aleatorias del proyecto</li>
+            <li><strong>Accountability partner:</strong> Comparte tus metas con alguien de confianza</li>
+            <li><strong>Recompensas inmediatas:</strong> Celebra pequeños logros</li>
+          </ul>
+          
+          <p>Recuerda: la procrastinación es a menudo miedo al fracaso disfrazado. Acepta que la perfección es enemiga del progreso.</p>
+        </div>
+
+        <div class="article-card">
+          <h3>🔄 Rutinas de Revisión y Mejora</h3>
+          <p>La productividad sostenible requiere evaluación y ajuste constante:</p>
+          
+          <h4>Revisión Semanal (30 minutos):</h4>
+          <ul>
+            <li>¿Qué funcionó bien esta semana?</li>
+            <li>¿Qué obstáculos encontré?</li>
+            <li>¿Cómo puedo mejorar la próxima semana?</li>
+            <li>¿Mis metas siguen siendo relevantes?</li>
+          </ul>
+          
+          <h4>Revisión Mensual (1 hora):</h4>
+          <ul>
+            <li>Análisis de patrones de productividad</li>
+            <li>Ajuste de herramientas y técnicas</li>
+            <li>Planificación de metas a mediano plazo</li>
+            <li>Celebración de logros alcanzados</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contacto -->
+    <section class="content-section" id="contacto">
+      <div class="legal-card">
+        <h2>💌 Contacto</h2>
+        <p>¿Tienes preguntas sobre productividad o sugerencias para mejorar nuestras herramientas? Me encantaría escucharte.</p>
+        
+        <div class="contact-form">
+          <form action="#" method="post">
+            <label for="nombre">Nombre completo:</label>
+            <input type="text" id="nombre" name="nombre" required>
+            
+            <label for="email">Correo electrónico:</label>
+            <input type="email" id="email" name="email" required>
+            
+            <label for="tema">Tema:</label>
+            <select id="tema" name="tema" style="background: #2c2c2c; color: #fff; padding: 0.7rem; border: none; border-radius: 8px;">
+              <option value="consulta">Consulta sobre productividad</option>
+              <option value="sugerencia">Sugerencia de mejora</option>
+              <option value="error">Reporte de error</option>
+              <option value="colaboracion">Propuesta de colaboración</option>
+            </select>
+            
+            <label for="mensaje">Mensaje:</label>
+            <textarea id="mensaje" name="mensaje" required placeholder="Comparte tus ideas, preguntas o comentarios..."></textarea>
+            
+            <button type="submit" style="margin-top: 1rem; width: 100%;">Enviar mensaje</button>
+          </form>
+        </div>
+        
+        <p style="margin-top: 2rem; text-align: center; color: #888;">
+          📧 También puedes escribirme directamente a: <strong style="color: #00ffe1;">fredy113@gmail.com</strong>
+        </p>
+      </div>
+    </section>
+
+    <!-- Políticas -->
+    <section class="content-section" id="privacidad">
+      <div class="legal-card">
+        <h2>🔒 Política de Privacidad</h2>
+        <p><strong>Última actualización:</strong> Enero 2025</p>
+        
+        <h3>Información que recopilamos</h3>
+        <p>Este sitio web recopila información limitada para mejorar su experiencia:</p>
+        <ul>
+          <li><strong>Datos de navegación:</strong> Páginas visitadas, tiempo de permanencia, dispositivo utilizado</li>
+          <li><strong>Cookies técnicas:</strong> Para recordar preferencias y configuraciones</li>
+          <li><strong>Formulario de contacto:</strong> Solo la información que voluntariamente proporciones</li>
+        </ul>
+        
+        <h3>Uso de la información</h3>
+        <p>Utilizamos esta información para:</p>
+        <ul>
+          <li>Mejorar el contenido y funcionalidad del sitio</li>
+          <li>Responder a consultas y comentarios</li>
+          <li>Generar estadísticas anónimas de uso</li>
+          <li>Personalizar la experiencia del usuario</li>
+        </ul>
+        
+        <h3>Google AdSense</h3>
+        <p>Este sitio utiliza Google AdSense para mostrar anuncios relevantes. Google puede usar cookies para personalizar anuncios basados en visitas anteriores. Puedes optar por no recibir anuncios personalizados visitando la configuración de anuncios de Google.</p>
+        
+        <h3>Tus derechos</h3>
+        <p>Tienes derecho a:</p>
+        <ul>
+          <li>Acceder a tu información personal</li>
+          <li>Corregir datos inexactos</li>
+          <li>Solicitar la eliminación de tus datos</li>
+          <li>Optar por no recibir comunicaciones</li>
+        </ul>
+        
+        <p>Para ejercer estos derechos, contáctanos a través del formulario anterior.</p>
       </div>
 
-      <div id="pomodoro">
-        <h2>Temporizador Pomodoro</h2>
-        <p id="pomodoro">25:00</p>
-        <button onclick="startPomodoro()">Iniciar</button>
-        <button onclick="resetPomodoro()">Reiniciar</button>
+      <div class="legal-card">
+        <h2>📋 Términos y Condiciones</h2>
+        <p><strong>Última actualización:</strong> Enero 2025</p>
+        
+        <h3>Aceptación de términos</h3>
+        <p>Al acceder y utilizar este sitio web, aceptas cumplir con estos términos y condiciones. Si no estás de acuerdo, por favor no utilices nuestros servicios.</p>
+        
+        <h3>Uso del sitio</h3>
+        <p>Este sitio web proporciona:</p>
+        <ul>
+          <li>Herramientas gratuitas de productividad (cronómetro, temporizador Pomodoro, reloj)</li>
+          <li>Contenido educativo sobre técnicas de productividad</li>
+          <li>Consejos y guías para mejorar el rendimiento personal</li>
+        </ul>
+        
+        <h3>Limitaciones de responsabilidad</h3>
+        <p>Este sitio se proporciona "tal como está". No garantizamos que:</p>
+        <ul>
+          <li>Las herramientas estén libres de errores</li>
+          <li>El servicio esté disponible 24/7</li>
+          <li>El contenido sea completamente preciso</li>
+        </ul>
+        
+        <h3>Propiedad intelectual</h3>
+        <p>Todo el contenido original de este sitio está protegido por derechos de autor. Puedes usar las herramientas gratuitamente, pero no redistribuir el código sin autorización.</p>
+        
+        <h3>Enlaces externos</h3>
+        <p>Este sitio puede contener enlaces a sitios web de terceros. No somos responsables del contenido o políticas de privacidad de estos sitios externos.</p>
+        
+        <h3>Modificaciones</h3>
+        <p>Nos reservamos el derecho de modificar estos términos en cualquier momento. Los cambios entrarán en vigencia inmediatamente después de su publicación.</p>
+        
+        <p><strong>Contacto legal:</strong> Para cualquier consulta legal, utiliza el formulario de contacto especificando el tema legal.</p>
       </div>
     </section>
+  </main>
 
-    <section class="info" id="info">
-      <h2>¿Qué es el método Pomodoro?</h2>
-      <p>El método Pomodoro es una técnica para mejorar tu productividad. Consiste en trabajar por 25 minutos y descansar 5 minutos. Estos ciclos ayudan a mantener el enfoque y la energía.</p>
-
-      <h3>Consejos para trabajar mejor</h3>
-      <ul>
-        <li>Establece metas diarias.</li>
-        <li>Elimina distracciones durante los bloques de trabajo.</li>
-        <li>Utiliza descansos para relajarte o caminar un poco.</li>
-      </ul>
-    </section>
-
-    <section class="legal" id="privacidad">
-      <h2>Política de Privacidad</h2>
-      <p>No recopilamos datos personales directamente. Sin embargo, servicios como Google AdSense pueden usar cookies para mostrar anuncios relevantes.</p>
-      <p>Utilizamos cookies para mejorar la experiencia del usuario. Puedes desactivarlas desde la configuración de tu navegador.</p>
-      <p>Este sitio puede contener enlaces a otros sitios. No somos responsables de sus políticas de privacidad.</p>
-      <p>Al usar nuestro sitio, aceptas esta política de privacidad.</p>
-    </section>
-
-    <section class="legal" id="terminos">
-      <h2>Términos y Condiciones</h2>
-      <p>Este sitio proporciona herramientas gratuitas como reloj, cronómetro y temporizador Pomodoro para uso personal.</p>
-      <p>Al acceder a este sitio, aceptas utilizarlo de manera responsable y sin violar ninguna ley.</p>
-      <p>No garantizamos que las herramientas estén libres de errores ni que siempre estén disponibles.</p>
-      <p>Nos reservamos el derecho de modificar estos términos en cualquier momento sin previo aviso.</p>
-    </section>
   <footer>
-    <p>© 2025 Reloj Productivo | Fredy Peláez</p>
-  </footer>
-
-  <script>
-    function updateClock() {
-      const now = new Date();
-      const time = now.toLocaleTimeString();
-      document.getElementById('clock').textContent = time;
-    }
-    setInterval(updateClock, 1000);
-    updateClock();
-
-    let stopwatchInterval;
-    let stopwatchTime = 0;
-
-    function updateStopwatch() {
-      const hours = String(Math.floor(stopwatchTime / 3600)).padStart(2, '0');
-      const minutes = String(Math.floor((stopwatchTime % 3600) / 60)).padStart(2, '0');
-      const seconds = String(stopwatchTime % 60).padStart(2, '0');
-      document.getElementById('stopwatch').textContent = `${hours}:${minutes}:${seconds}`;
-    }
-
-    function startStopwatch() {
-      if (!stopwatchInterval) {
-        stopwatchInterval = setInterval(() => {
-          stopwatchTime++;
-          updateStopwatch();
-        }, 1000);
-      }
-    }
-
-    function stopStopwatch() {
-      clearInterval(stopwatchInterval);
-      stopwatchInterval = null;
-    }
-
-    function resetStopwatch() {
-      stopwatchTime = 0;
-      updateStopwatch();
-      stopStopwatch();
-    }
-
-    let pomodoroTime = 1500;
-    let pomodoroInterval;
-
-    function updatePomodoro() {
-      const minutes = String(Math.floor(pomodoroTime / 60)).padStart(2, '0');
-      const seconds = String(pomodoroTime % 60).padStart(2, '0');
-      document.getElementById('pomodoro').textContent = `${minutes}:${seconds}`;
-    }
-
-    function startPomodoro() {
-      if (!pomodoroInterval) {
-        pomodoroInterval = setInterval(() => {
-          if (pomodoroTime > 0) {
-            pomodoroTime--;
-            updatePomodoro();
-          } else {
-            clearInterval(pomodoroInterval);
-            pomodoroInterval = null;
-            alert("¡Tiempo terminado! Toma un descanso.");
-          }
-        }, 1000);
-      }
-    }
-
-    function resetPomodoro() {
-      pomodoroTime = 1500;
-      updatePomodoro();
-      clearInterval(pomodoroInterval);
-      pomodoroInterval = null;
-    }
-
-    updateStopwatch();
-    updatePomodoro();
-  </script>
-</body>
-</html>
+    <p>© 2025 Guía Completa de Productividad | Creado por Fredy Peláez</p>
+    <p>Ayudando a miles de personas a ser más productivas cada día</p>
+    <p>
+      <a href="#privacidad" style="color: #00ffe1; margin: 0 1rem;">Privacidad</a>
+      <a href="#contacto" style="color: #00ffe1; margin: 0 1rem;">Contacto</a>
+      <a href="mailto:contacto@relojproductivo.com" style="color: #00
 
 
 
