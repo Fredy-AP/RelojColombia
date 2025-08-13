@@ -1,701 +1,179 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Guía completa de productividad con cronómetro, temporizador Pomodoro, técnicas de estudio y consejos para mejorar tu rendimiento diario.">
-  <meta name="keywords" content="productividad, pomodoro, cronómetro, técnicas de estudio, gestión del tiempo, concentración, enfoque">
-  <meta name="author" content="Fredy Peláez">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guía de Productividad</title>
+  <style>
+    body {
+      background: #111;
+      color: white;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
 
-  <title>Guía Completa de Productividad - Técnicas, Herramientas y Consejos</title>
-   <style>
- :root {
-  --color-principal: #ffb347; /* atardecer cálido */
-  --color-secundario: #ff7043; /* naranja vibrante */
-  --color-acento: #66bb6a; /* verde montaña */
-  --color-fondo-oscuro: #2e1f14; /* tono café */
-  --color-texto: #fff7f0; /* blanco cálido */
-  --color-contraste: #fdd835; /* amarillo flor */
-}
+    h1, h2 {
+      margin-bottom: 10px;
+    }
 
-body {
-  background: linear-gradient(135deg, var(--color-fondo-oscuro) 0%, #3b2a1e 100%);
-  color: var(--color-texto);
-  font-family: 'Segoe UI', sans-serif;
-}
+    .card {
+      background: #222;
+      padding: 20px;
+      border-radius: 10px;
+      margin: 15px auto;
+      max-width: 400px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    }
 
-header {
-  background: linear-gradient(135deg, rgba(46, 31, 20, 0.9), rgba(59, 42, 30, 0.9));
-}
+    button {
+      background: #00aaff;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 5px;
+      font-size: 1rem;
+    }
 
-header h1 {
-  background: linear-gradient(135deg, var(--color-principal), var(--color-secundario), var(--color-acento));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
+    button:hover {
+      background: #008ecc;
+    }
 
-nav {
-  background: rgba(46, 31, 20, 0.95);
-  border-bottom: 1px solid rgba(255, 179, 71, 0.3);
-}
+    .warning {
+      animation: pulse 1s infinite;
+      color: red;
+      font-weight: bold;
+    }
 
-nav a {
-  color: var(--color-principal);
-}
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
 
-nav a:hover {
-  background: linear-gradient(135deg, var(--color-secundario), var(--color-principal));
-  color: var(--color-fondo-oscuro);
-}
+    .notification {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      background: #333;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      opacity: 0;
+      transform: translateY(-20px);
+      transition: opacity 0.3s, transform 0.3s;
+      z-index: 999;
+    }
 
-.tool-card, .article-card, .legal-card {
-  background: rgba(59, 42, 30, 0.85);
-  border: 1px solid rgba(255, 179, 71, 0.2);
-}
-
-.tool-card:hover, .article-card:hover {
-  box-shadow: 0 30px 60px rgba(255, 179, 71, 0.3);
-  border-color: rgba(255, 179, 71, 0.5);
-}
-
-h1, h2, h3 {
-  background: linear-gradient(135deg, var(--color-secundario), var(--color-principal));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-button {
-  background: linear-gradient(135deg, var(--color-acento), var(--color-principal));
-  color: var(--color-fondo-oscuro);
-}
-
-button:hover {
-  box-shadow: 0 15px 30px rgba(255, 179, 71, 0.4);
-}
-
-footer {
-  background: linear-gradient(135deg, rgba(46, 31, 20, 0.95), rgba(59, 42, 30, 0.95));
-  border-top: 1px solid rgba(255, 179, 71, 0.2);
-}
-</style>
+    .notification.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <h1>🚀 Guía Completa de Productividad</h1>
-    <p>Descubre técnicas comprobadas, herramientas efectivas y estrategias para maximizar tu rendimiento personal y profesional</p>
-  </header>
+  <h1>Guía de Productividad</h1>
 
-  <nav>
-    <a href="#inicio">Inicio</a>
-    <a href="#herramientas">Herramientas</a>
-    <a href="#tecnicas">Técnicas</a>
-    <a href="#articulos">Artículos</a>
-    <a href="#consejos">Consejos</a>
-    <a href="#contacto">Contacto</a>
-    <a href="#privacidad">Privacidad</a>
-  </nav>
+  <!-- Reloj -->
+  <div class="card">
+    <h2>⏰ Reloj</h2>
+    <p id="clock">00:00:00</p>
+  </div>
 
-  <main>
-    <section class="content-section" id="herramientas">
-      <div class="breadcrumb">
-        <a href="#inicio">Inicio</a> > Herramientas de Productividad
-      </div>
-      
-      <h2>⚡ Herramientas de Productividad</h2>
-      <p>Utiliza estas herramientas gratuitas para mejorar tu gestión del tiempo y concentración:</p>
-      
-      <div class="tools-grid">
-        <div class="tool-card">
-          <h3>🕐 Reloj en Tiempo Real</h3>
-          <div id="clock">--:--:--</div>
-          <p>Mantén siempre visible la hora actual para gestionar mejor tu tiempo durante el día.</p>
-        </div>
+  <!-- Cronómetro -->
+  <div class="card">
+    <h2>⏱ Cronómetro</h2>
+    <p id="stopwatch">00:00</p>
+    <button onclick="startStopwatch()">Iniciar</button>
+    <button onclick="stopStopwatch()">Detener</button>
+    <button onclick="resetStopwatch()">Reiniciar</button>
+  </div>
 
-        <div class="tool-card">
-          <h3>⏱️ Cronómetro Profesional</h3>
-          <div id="stopwatch">00:00:00</div>
-          <div>
-            <button onclick="startStopwatch()">Iniciar</button>
-            <button onclick="stopStopwatch()">Detener</button>
-            <button onclick="resetStopwatch()">Reiniciar</button>
-          </div>
-          <p>Perfecto para medir el tiempo dedicado a tareas específicas y actividades de trabajo.</p>
-        </div>
+  <!-- Pomodoro -->
+  <div class="card">
+    <h2>🍅 Temporizador Pomodoro</h2>
+    <p id="pomodoro">25:00</p>
+    <button onclick="startPomodoro()">Iniciar</button>
+    <button onclick="resetPomodoro()">Reiniciar</button>
+  </div>
 
-        <div class="tool-card">
-          <h3>🍅 Temporizador Pomodoro</h3>
-          <div id="pomodoro-display">25:00</div>
-          <div class="progress-bar">
-            <div id="pomodoro-progress" class="progress-fill" style="width: 0%"></div>
-          </div>
-          <div>
-            <button onclick="startPomodoro()">Iniciar Pomodoro</button>
-            <button onclick="resetPomodoro()">Reiniciar</button>
-          </div>
-          <p>La técnica más efectiva para mantener la concentración y evitar el agotamiento mental.</p>
-          <div style="margin-top: 1rem; color: #888; font-size: 0.9rem;">
-            Pomodoros completados hoy: <span id="pomodoro-count" style="color: #00ffd5; font-weight: bold;">0</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="content-section" id="tecnicas">
-      <h2>🎯 Técnicas de Productividad Comprobadas</h2>
-      
-      <div class="article-grid">
-        <div class="article-card">
-          <h3>La Técnica Pomodoro: Guía Completa</h3>
-          <div class="article-meta">
-            <span class="read-time">5 min lectura</span> • Publicado: Enero 2025
-          </div>
-          <p>La técnica Pomodoro, desarrollada por Francesco Cirillo en los años 80, es una metodología de gestión del tiempo que ha revolucionado la forma en que trabajamos.</p>
-          
-          <h4>¿Cómo funciona?</h4>
-          <p>El método se basa en dividir el trabajo en intervalos de 25 minutos (llamados "pomodoros"), seguidos de descansos cortos de 5 minutos. Después de 4 pomodoros, se toma un descanso más largo de 15-30 minutos.</p>
-          
-          <h4>Beneficios científicamente comprobados:</h4>
-          <ul>
-            <li><strong>Mejora la concentración:</strong> Los intervalos cortos mantienen la mente fresca</li>
-            <li><strong>Reduce la procrastinación:</strong> 25 minutos parecen manejables para cualquier tarea</li>
-            <li><strong>Aumenta la motivación:</strong> Cada pomodoro completado genera sensación de logro</li>
-            <li><strong>Combate el agotamiento:</strong> Los descansos regulares previenen la fatiga mental</li>
-          </ul>
-          
-          <div class="tip-box">
-            <strong>💡 Consejo Pro:</strong> Durante un pomodoro, si surge una idea o distracción, anótala rápidamente y continúa. Revisarás estas notas durante el descanso.
-          </div>
-        </div>
-
-        <div class="article-card">
-          <h3>Gestión del Tiempo: Matriz de Eisenhower</h3>
-          <div class="article-meta">
-            <span class="read-time">4 min lectura</span> • Publicado: Enero 2025
-          </div>
-          <p>Aprende a priorizar tareas usando la matriz que utilizaba el presidente Eisenhower para tomar decisiones importantes.</p>
-          
-          <h4>Los 4 Cuadrantes:</h4>
-          <ol>
-            <li><strong>Urgente e Importante:</strong> Hazlo inmediatamente</li>
-            <li><strong>Importante, no Urgente:</strong> Planifica para hacerlo</li>
-            <li><strong>Urgente, no Importante:</strong> Delega si es posible</li>
-            <li><strong>Ni Urgente ni Importante:</strong> Elimina de tu lista</li>
-          </ol>
-          
-          <p>Esta técnica te ayuda a enfocar tu energía en lo que realmente importa, evitando la trampa de estar siempre "ocupado" pero no productivo.</p>
-        </div>
-
-        <div class="article-card">
-          <h3>Técnica Getting Things Done (GTD)</h3>
-          <div class="article-meta">
-            <span class="read-time">6 min lectura</span> • Publicado: Enero 2025
-          </div>
-          <p>El sistema GTD de David Allen es una metodología completa para organizar tareas y proyectos de manera eficiente.</p>
-          
-          <h4>Los 5 Pasos del GTD:</h4>
-          <ol>
-            <li><strong>Capturar:</strong> Anota todo lo que requiere tu atención</li>
-            <li><strong>Clarificar:</strong> Define qué significa cada elemento y qué acción requiere</li>
-            <li><strong>Organizar:</strong> Clasifica según contexto y prioridad</li>
-            <li><strong>Reflexionar:</strong> Revisa regularmente tu sistema</li>
-            <li><strong>Comprometerse:</strong> Ejecuta con confianza</li>
-          </ol>
-          
-          <div class="tip-box">
-            <strong>🎯 Regla de los 2 minutos:</strong> Si algo toma menos de 2 minutos, hazlo inmediatamente en lugar de agregarlo a tu lista.
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="content-section" id="articulos">
-      <h2>📚 Artículos y Guías de Productividad</h2>
-      
-      <div class="article-grid">
-        <div class="article-card">
-          <h3>Cómo Crear el Espacio de Trabajo Perfecto</h3>
-          <div class="article-meta">
-            <span class="read-time">7 min lectura</span> • Productividad Espacial
-          </div>
-          <p>Tu entorno de trabajo tiene un impacto directo en tu productividad. Un espacio bien diseñado puede aumentar tu eficiencia hasta en un 40%.</p>
-          
-          <h4>Elementos Clave de un Espacio Productivo:</h4>
-          <ul>
-            <li><strong>Iluminación adecuada:</strong> Preferiblemente luz natural, complementada con luz artificial cálida</li>
-            <li><strong>Organización visual:</strong> Un escritorio limpio reduce el estrés y mejora la concentración</li>
-            <li><strong>Ergonomía:</strong> Silla y escritorio a la altura correcta previenen fatiga</li>
-            <li><strong>Plantas:</strong> Mejoran la calidad del aire y reducen el estrés</li>
-            <li><strong>Zona libre de distracciones:</strong> Minimiza elementos que desvíen tu atención</li>
-          </ul>
-        </div>
-
-        <div class="article-card">
-          <h3>Hábitos Matutinos de Personas Altamente Productivas</h3>
-          <div class="article-meta">
-            <span class="read-time">5 min lectura</span> • Rutinas de Éxito
-          </div>
-          <p>La forma en que comienzas tu día determina en gran medida tu productividad. Estos hábitos están respaldados por investigaciones y utilizados por líderes exitosos.</p>
-          
-          <h4>Rutina Matutina Efectiva:</h4>
-          <ol>
-            <li><strong>Despertar temprano (5:30-6:30 AM):</strong> Aprovecha las horas de mayor claridad mental</li>
-            <li><strong>Hidratación:</strong> Un vaso de agua activa tu metabolismo</li>
-            <li><strong>Ejercicio ligero:</strong> 10-15 minutos aumentan tu energía para todo el día</li>
-            <li><strong>Meditación o mindfulness:</strong> 5 minutos reducen el estrés y mejoran el enfoque</li>
-            <li><strong>Planificación del día:</strong> Define las 3 tareas más importantes</li>
-            <li><strong>Desayuno nutritivo:</strong> Combustible para tu cerebro</li>
-          </ol>
-          
-          <div class="tip-box">
-            <strong>⏰ Implementación gradual:</strong> No intentes cambiar todo de una vez. Agrega un hábito por semana hasta completar tu rutina ideal.
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="content-section" id="consejos">
-      <h2>💡 Consejos y Trucos de Productividad</h2>
-      
-      <div class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-number">25</div>
-          <p>minutos es la duración ideal de un bloque de trabajo enfocado</p>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">3</div>
-          <p>tareas importantes máximo por día para mantener el enfoque</p>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">90</div>
-          <p>segundos de respiración profunda para resetear la concentración</p>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">2</div>
-          <p>horas antes de dormir sin pantallas mejora el descanso</p>
-        </div>
-      </div>
-
-      <div class="article-grid">
-        <div class="article-card">
-          <h3>🧠 Técnicas de Concentración Profunda</h3>
-          <p>La concentración profunda es una habilidad que se puede entrenar. Aquí tienes métodos efectivos:</p>
-          
-          <ul>
-            <li><strong>Técnica 20-20-20:</strong> Cada 20 minutos, mira algo a 20 metros durante 20 segundos</li>
-            <li><strong>Música binural:</strong> Frecuencias específicas pueden mejorar el enfoque</li>
-            <li><strong>Bloqueador de sitios web:</strong> Elimina tentaciones digitales durante el trabajo</li>
-            <li><strong>Método del papel en blanco:</strong> Anota distracciones sin dejar de trabajar</li>
-          </ul>
-          
-          <div class="tip-box">
-            <strong>🎯 Flujo de trabajo:</strong> Identifica tu horario de mayor energía mental y reserva las tareas más importantes para esas horas.
-          </div>
-        </div>
-
-        <div class="article-card">
-          <h3>⚡ Combatir la Procrastinación</h3>
-          <p>La procrastinación es el enemigo número uno de la productividad. Estrategias científicamente probadas:</p>
-          
-          <ul>
-            <li><strong>Regla del 5 minutos:</strong> Comprométete solo con 5 minutos de trabajo</li>
-            <li><strong>Técnica del queso suizo:</strong> Trabaja en partes aleatorias del proyecto</li>
-            <li><strong>Accountability partner:</strong> Comparte tus metas con alguien de confianza</li>
-            <li><strong>Recompensas inmediatas:</strong> Celebra pequeños logros</li>
-          </ul>
-          
-          <p>Recuerda: la procrastinación es a menudo miedo al fracaso disfrazado. Acepta que la perfección es enemiga del progreso.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="content-section" id="contacto">
-      <div class="legal-card">
-        <h2>💌 Contacto</h2>
-        <p>¿Tienes preguntas sobre productividad o sugerencias para mejorar nuestras herramientas? Me encantaría escucharte.</p>
-        
-        <div class="contact-form">
-          <form id="contact-form">
-            <label for="nombre">Nombre completo:</label>
-            <input type="text" id="nombre" name="nombre" required>
-            
-            <label for="email">Correo electrónico:</label>
-            <input type="email" id="email" name="email" required>
-            
-            <label for="tema">Tema:</label>
-            <select id="tema" name="tema">
-              <option value="consulta">Consulta sobre productividad</option>
-              <option value="sugerencia">Sugerencia de mejora</option>
-              <option value="error">Reporte de error</option>
-              <option value="colaboracion">Propuesta de colaboración</option>
-            </select>
-            
-            <label for="mensaje">Mensaje:</label>
-            <textarea id="mensaje" name="mensaje" required placeholder="Comparte tus ideas, preguntas o comentarios..."></textarea>
-            
-            <button type="submit" style="margin-top: 1rem; width: 100%;">Enviar mensaje</button>
-          </form>
-        </div>
-        
-        <p style="margin-top: 2rem; text-align: center; color: #888;">
-          📧 También puedes escribirme directamente a: <strong style="color: #00ffe1;">contacto@relojproductivo.com</strong>
-        </p>
-      </div>
-    </section>
-
-    <section class="content-section" id="privacidad">
-      <div class="legal-card">
-        <h2>🔒 Política de Privacidad</h2>
-        <p><strong>Última actualización:</strong> Enero 2025</p>
-        
-        <h3>Información que recopilamos</h3>
-        <p>Este sitio web recopila información limitada para mejorar su experiencia:</p>
-        <ul>
-          <li><strong>Datos de navegación:</strong> Páginas visitadas, tiempo de permanencia, dispositivo utilizado</li>
-          <li><strong>Cookies técnicas:</strong> Para recordar preferencias y configuraciones</li>
-          <li><strong>Formulario de contacto:</strong> Solo la información que voluntariamente proporciones</li>
-        </ul>
-        
-        <h3>Uso de la información</h3>
-        <p>Utilizamos esta información para:</p>
-        <ul>
-          <li>Mejorar el contenido y funcionalidad del sitio</li>
-          <li>Responder a consultas y comentarios</li>
-          <li>Generar estadísticas anónimas de uso</li>
-          <li>Personalizar la experiencia del usuario</li>
-        </ul>
-        
-        <h3>Tus derechos</h3>
-        <p>Tienes derecho a:</p>
-        <ul>
-          <li>Acceder a tu información personal</li>
-          <li>Corregir datos inexactos</li>
-          <li>Solicitar la eliminación de tus datos</li>
-          <li>Optar por no recibir comunicaciones</li>
-        </ul>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <p>© 2025 Guía Completa de Productividad | Creado por Fredy Peláez</p>
-    <p>Ayudando a miles de personas a ser más productivas cada día</p>
-    <p>
-      <a href="#privacidad" style="color: #00ffe1; margin: 0 1rem;">Privacidad</a>
-      <a href="#contacto" style="color: #00ffe1; margin: 0 1rem;">Contacto</a>
-    </p>
-  </footer>
+  <!-- Notificación -->
+  <div id="notification" class="notification"></div>
 
   <script>
-    // ============ VARIABLES GLOBALES ============
-    let stopwatchInterval;
-    let stopwatchTime = 0;
-    let isStopwatchRunning = false;
-    
-    let pomodoroTime = 1500; // 25 minutos en segundos
-    let pomodoroInterval;
-    let isPomodoroRunning = false;
-    let pomodoroPhase = 'work'; // 'work' o 'break'
-    let pomodoroCount = 0;
-    let initialPomodoroTime = 1500;
-
-    // ============ RELOJ EN TIEMPO REAL ============
+    // Reloj en tiempo real
     function updateClock() {
       const now = new Date();
-      const options = {
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit',
-        hour12: false
-      };
-      const time = now.toLocaleTimeString('es-ES', options);
-      document.getElementById('clock').textContent = time;
+      document.getElementById("clock").textContent = now.toLocaleTimeString();
     }
-    
-    // Actualizar reloj cada segundo
     setInterval(updateClock, 1000);
-    updateClock(); // Mostrar inmediatamente
+    updateClock();
 
-    // ============ CRONÓMETRO ============
-    function updateStopwatch() {
-      const hours = String(Math.floor(stopwatchTime / 3600)).padStart(2, '0');
-      const minutes = String(Math.floor((stopwatchTime % 3600) / 60)).padStart(2, '0');
-      const seconds = String(stopwatchTime % 60).padStart(2, '0');
-      document.getElementById('stopwatch').textContent = `${hours}:${minutes}:${seconds}`;
-    }
-
+    // Cronómetro
+    let stopwatchInterval, stopwatchTime = 0;
     function startStopwatch() {
-      if (!isStopwatchRunning) {
-        stopwatchInterval = setInterval(() => {
-          stopwatchTime++;
-          updateStopwatch();
-        }, 1000);
-        isStopwatchRunning = true;
-        
-        // Encontrar el botón y cambiar su texto
-        const buttons = document.querySelectorAll('button');
-        buttons.forEach(button => {
-          if (button.onclick && button.onclick.toString().includes('startStopwatch')) {
-            button.textContent = 'Pausar';
-            button.style.background = 'linear-gradient(135deg, #ff6b35, #ff8c42)';
-          }
-        });
-      } else {
-        stopStopwatch();
-      }
+      clearInterval(stopwatchInterval);
+      stopwatchInterval = setInterval(() => {
+        stopwatchTime++;
+        document.getElementById("stopwatch").textContent =
+          String(Math.floor(stopwatchTime / 60)).padStart(2, '0') + ":" +
+          String(stopwatchTime % 60).padStart(2, '0');
+      }, 1000);
     }
-
     function stopStopwatch() {
       clearInterval(stopwatchInterval);
-      stopwatchInterval = null;
-      isStopwatchRunning = false;
-      
-      // Restaurar botón
-      const buttons = document.querySelectorAll('button');
-      buttons.forEach(button => {
-        if (button.onclick && button.onclick.toString().includes('startStopwatch')) {
-          button.textContent = 'Iniciar';
-          button.style.background = 'linear-gradient(135deg, #00bfa6, #00ffd5)';
-        }
-      });
     }
-
     function resetStopwatch() {
-      stopStopwatch();
+      clearInterval(stopwatchInterval);
       stopwatchTime = 0;
-      updateStopwatch();
+      document.getElementById("stopwatch").textContent = "00:00";
     }
 
-    // ============ TEMPORIZADOR POMODORO ============
-    function updatePomodoro() {
-      const minutes = String(Math.floor(pomodoroTime / 60)).padStart(2, '0');
-      const seconds = String(pomodoroTime % 60).padStart(2, '0');
-      document.getElementById('pomodoro-display').textContent = `${minutes}:${seconds}`;
-      
-      // Actualizar barra de progreso
-      const progress = ((initialPomodoroTime - pomodoroTime) / initialPomodoroTime) * 100;
-      const progressBar = document.getElementById('pomodoro-progress');
-      if (progressBar) {
-        progressBar.style.width = `${progress}%`;
-      }
-      
-      // Cambiar color según la fase
-      const display = document.getElementById('pomodoro-display');
-      if (pomodoroPhase === 'work') {
-        display.style.color = '#ffffff';
-        if (progressBar) {
-          progressBar.style.background = 'linear-gradient(90deg, #00bfa6, #00ffd5)';
-        }
-      } else {
-        display.style.color = '#00ff88';
-        if (progressBar) {
-          progressBar.style.background = 'linear-gradient(90deg, #ff6b35, #ff8c42)';
-        }
-      }
-    }
-
+    // Pomodoro
+    let pomodoroInterval, pomodoroTime = 25 * 60;
     function startPomodoro() {
-      if (!isPomodoroRunning) {
-        pomodoroInterval = setInterval(() => {
-          if (pomodoroTime > 0) {
-            pomodoroTime--;
-            updatePomodoro();
-            
-            // Añadir efecto pulsante cuando quedan menos de 60 segundos
-            const display = document.getElementById('pomodoro-display');
-            if (pomodoroTime <= 60 && pomodoroTime > 0) {
-              display.classList.add('pulsing');
-            } else {
-              display.classList.remove('pulsing');
-            }
-          } else {
-            // Tiempo terminado
-            clearInterval(pomodoroInterval);
-            pomodoroInterval = null;
-            isPomodoroRunning = false;
-            
-            const display = document.getElementById('pomodoro-display');
-            display.classList.remove('pulsing');
-            
-            if (pomodoroPhase === 'work') {
-              // Pomodoro completado
-              pomodoroCount++;
-              document.getElementById('pomodoro-count').textContent = pomodoroCount;
-              
-              // Cambiar a descanso
-              pomodoroPhase = 'break';
-              pomodoroTime = pomodoroCount % 4 === 0 ? 1800 : 300; // 30 min cada 4 pomodoros, sino 5 min
-              initialPomodoroTime = pomodoroTime;
-              const breakTime = pomodoroCount % 4 === 0 ? '30 minutos (descanso largo)' : '5 minutos';
-              showNotification('¡Pomodoro completado! 🍅', `Tiempo de descanso: ${breakTime}`);
-            } else {
-              // Cambiar a trabajo
-              pomodoroPhase = 'work';
-              pomodoroTime = 1500; // 25 minutos de trabajo
-              initialPomodoroTime = pomodoroTime;
-              showNotification('¡Descanso terminado! ⚡', 'Hora de trabajar: 25 minutos');
-            }
-            
-            updatePomodoro();
-            
-            // Restaurar botón
-            const buttons = document.querySelectorAll('button');
-            buttons.forEach(button => {
-              if (button.onclick && button.onclick.toString().includes('startPomodoro')) {
-                button.textContent = 'Iniciar Pomodoro';
-                button.style.background = 'linear-gradient(135deg, #00bfa6, #00ffd5)';
-              }
-            });
-          }
-        }, 1000);
-        
-        isPomodoroRunning = true;
-        
-        // Cambiar botón
-        const buttons = document.querySelectorAll('button');
-        buttons.forEach(button => {
-          if (button.onclick && button.onclick.toString().includes('startPomodoro')) {
-            button.textContent = 'Pausar';
-            button.style.background = 'linear-gradient(135deg, #ff6b35, #ff8c42)';
-          }
-        });
-        
-        // Mostrar fase actual
-        const phaseText = pomodoroPhase === 'work' ? 'Trabajando...' : 'Descansando...';
-        showNotification('Pomodoro iniciado', phaseText);
-        
-      } else {
-        // Pausar
-        clearInterval(pomodoroInterval);
-        pomodoroInterval = null;
-        isPomodoroRunning = false;
-        
-        const display = document.getElementById('pomodoro-display');
-        display.classList.remove('pulsing');
-        
-        // Restaurar botón
-        const buttons = document.querySelectorAll('button');
-        buttons.forEach(button => {
-          if (button.onclick && button.onclick.toString().includes('startPomodoro')) {
-            button.textContent = 'Continuar';
-            button.style.background = 'linear-gradient(135deg, #00bfa6, #00ffd5)';
-          }
-        });
-      }
-    }
+      clearInterval(pomodoroInterval);
+      pomodoroInterval = setInterval(() => {
+        pomodoroTime--;
+        let minutes = String(Math.floor(pomodoroTime / 60)).padStart(2, '0');
+        let seconds = String(pomodoroTime % 60).padStart(2, '0');
+        const display = document.getElementById("pomodoro");
+        display.textContent = `${minutes}:${seconds}`;
 
+        // Aviso visual
+        if (pomodoroTime <= 60) {
+          display.classList.add("warning");
+        }
+
+        if (pomodoroTime <= 0) {
+          clearInterval(pomodoroInterval);
+          showNotification("⏳ ¡Pomodoro finalizado!");
+          pomodoroTime = 25 * 60;
+        }
+      }, 1000);
+    }
     function resetPomodoro() {
       clearInterval(pomodoroInterval);
-      pomodoroInterval = null;
-      isPomodoroRunning = false;
-      pomodoroPhase = 'work';
-      pomodoroTime = 1500; // 25 minutos
-      initialPomodoroTime = pomodoroTime;
-      
-      const display = document.getElementById('pomodoro-display');
-      display.classList.remove('pulsing');
-      updatePomodoro();
-      
-      // Restaurar botón
-      const buttons = document.querySelectorAll('button');
-      buttons.forEach(button => {
-        if (button.onclick && button.onclick.toString().includes('startPomodoro')) {
-          button.textContent = 'Iniciar Pomodoro';
-          button.style.background = 'linear-gradient(135deg, #00bfa6, #00ffd5)';
-        }
-      });
-      
-      showNotification('Pomodoro reiniciado', 'Listo para comenzar');
+      pomodoroTime = 25 * 60;
+      const display = document.getElementById("pomodoro");
+      display.textContent = "25:00";
+      display.classList.remove("warning");
     }
 
-    // ============ SISTEMA DE NOTIFICACIONES ============
-    function showNotification(title, message) {
-      // Crear notificación visual
-      const notification = document.createElement('div');
-      notification.className = 'notification';
-      
-      notification.innerHTML = `
-        <div style="font-size: 1.2rem; margin-bottom: 0.5rem; font-weight: bold;">${title}</div>
-        <div style="font-size: 1rem; opacity: 0.9;">${message}</div>
-      `;
-      
-      document.body.appendChild(notification);
-      
-      // Remover después de 5 segundos
+    // Notificaciones
+    function showNotification(message) {
+      const notification = document.getElementById("notification");
+      notification.textContent = message;
+      notification.classList.add("show");
       setTimeout(() => {
-        notification.style.animation = 'slideOut 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
-        setTimeout(() => {
-          if (notification.parentNode) {
-            notification.parentNode.removeChild(notification);
-          }
-        }, 400);
-      }, 5000);
-      
-      // Intentar notificación del navegador (si está permitido)
-      if ('Notification' in window && Notification.permission === 'granted') {
-        new Notification(title, {
-          body: message,
-          icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🍅</text></svg>'
-        });
-      }
-      
-      // Reproducir sonido de notificación
-      try {
-        const audio = new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJmjpjt/j6SjxtKs2rJjxrTD2MhHvLHN');
-        audio.volume = 0.2;
-        audio.play().catch(() => {});
-      } catch (e) {}
-    }
-
-    // ============ FORMULARIO DE CONTACTO ============
-    document.addEventListener('DOMContentLoaded', function() {
-      const contactForm = document.getElementById('contact-form');
-      if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-          e.preventDefault();
-          
-          const formData = new FormData(this);
-          const nombre = formData.get('nombre');
-          
-          showNotification('¡Mensaje enviado! 📧', `Gracias ${nombre}, te responderemos pronto.`);
-          this.reset();
-        });
-      }
-      
-      // Solicitar permisos de notificación después de 3 segundos
-      setTimeout(() => {
-        if ('Notification' in window && Notification.permission === 'default') {
-          const permitir = confirm('¿Quieres recibir notificaciones cuando termine un Pomodoro? Esto te ayudará a mantener tu rutina de productividad.');
-          if (permitir) {
-            Notification.requestPermission();
-          }
-        }
+        notification.classList.remove("show");
       }, 3000);
-    });
-
-    // ============ NAVEGACIÓN SUAVE ============
-    document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-          });
-        }
-      });
-    });
-
-    // ============ INICIALIZACIÓN ============
-    // Actualizar displays iniciales
-    updateStopwatch();
-    updatePomodoro();
-    
-    // Mostrar mensaje de bienvenida
-    setTimeout(() => {
-      showNotification('¡Bienvenido! 🚀', 'Todas las herramientas están listas para usar');
-    }, 1000);
+    }
   </script>
+</body>
+</html>
 
 
 
