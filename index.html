@@ -1,50 +1,50 @@
-<!DOCTYPE html> <!-- Declara que el documento es HTML5 -->
-<html lang="es"> <!-- El idioma principal es español -->
+<!DOCTYPE html> <!-- Declaración de que el documento es HTML5 -->
+<html lang="es"> <!-- El idioma del documento es español -->
 <head>
-  <meta charset="UTF-8"> <!-- Codificación de caracteres para usar tildes y ñ -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Escalado adaptable para móviles -->
-  <title>Guía  de Productividad</title> <!-- Título de la pestaña del navegador -->
+  <meta charset="UTF-8"> <!-- Soporte para caracteres como tildes y ñ -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Ajuste para móviles -->
+  <title>Guía de Productividad con Sonido</title> <!-- Título de la pestaña -->
   <style>
     /* ======== ESTILOS GENERALES ======== */
     body {
-      font-family: Arial, sans-serif; /* Fuente general */
-      background: linear-gradient(135deg, #ffcc00, #009739, #ff0000); /* Degradado con colores de la bandera paisa */
-      color: white; /* Texto en blanco para contraste */
-      margin: 0; /* Quita márgenes por defecto */
-      padding: 0; /* Quita relleno por defecto */
-      text-align: center; /* Centra el contenido */
+      font-family: Arial, sans-serif; /* Fuente principal */
+      background: linear-gradient(135deg, #ffcc00, #009739, #ff0000); /* Colores bandera paisa */
+      color: white; /* Texto blanco */
+      margin: 0; /* Sin margen */
+      padding: 0; /* Sin padding */
+      text-align: center; /* Texto centrado */
     }
 
     h1 {
-      margin-top: 20px; /* Espacio superior */
+      margin-top: 20px; /* Espacio arriba */
       font-size: 2.5rem; /* Tamaño del título */
       text-shadow: 2px 2px 4px black; /* Sombra para resaltar */
     }
 
     .container {
-      display: flex; /* Acomoda elementos en fila */
-      flex-wrap: wrap; /* Permite que se ajusten en varias líneas */
+      display: flex; /* Organiza en filas */
+      flex-wrap: wrap; /* Permite varias líneas */
       justify-content: center; /* Centra horizontalmente */
       gap: 20px; /* Espacio entre tarjetas */
-      margin-top: 30px; /* Espacio desde arriba */
+      margin-top: 30px; /* Espacio superior */
     }
 
     .card {
-      background-color: rgba(0, 0, 0, 0.7); /* Fondo oscuro semitransparente */
+      background-color: rgba(0, 0, 0, 0.7); /* Fondo oscuro transparente */
       border-radius: 15px; /* Bordes redondeados */
       padding: 20px; /* Relleno interno */
-      width: 280px; /* Ancho fijo de las tarjetas */
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra para profundidad */
+      width: 280px; /* Ancho fijo */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra */
     }
 
     button {
       background-color: #ffcc00; /* Amarillo vivo */
       color: black; /* Texto negro */
       border: none; /* Sin borde */
-      padding: 10px 20px; /* Relleno interno */
+      padding: 10px 20px; /* Relleno */
       margin-top: 10px; /* Espacio superior */
       border-radius: 8px; /* Bordes redondeados */
-      cursor: pointer; /* Cambia a mano al pasar */
+      cursor: pointer; /* Cursor mano */
       font-weight: bold; /* Texto en negrita */
     }
 
@@ -52,9 +52,9 @@
       background-color: #e6b800; /* Amarillo más oscuro al pasar */
     }
 
-    /* Efecto pulso en Pomodoro */
+    /* Efecto pulso para últimos segundos del Pomodoro */
     .pulse {
-      animation: pulse 1s infinite; /* Repite animación infinitamente */
+      animation: pulse 1s infinite; /* Animación infinita */
     }
 
     @keyframes pulse {
@@ -63,34 +63,34 @@
       100% { transform: scale(1); }
     }
 
-    /* Notificación emergente */
+    /* Caja de notificación */
     #notification {
       position: fixed; /* Fijo en pantalla */
-      bottom: 20px; /* Pegado abajo */
-      right: 20px; /* Pegado a la derecha */
+      bottom: 20px; /* Desde abajo */
+      right: 20px; /* Desde la derecha */
       background-color: #ffcc00; /* Fondo amarillo */
       color: black; /* Texto negro */
-      padding: 15px; /* Relleno interno */
+      padding: 15px; /* Relleno */
       border-radius: 8px; /* Bordes redondeados */
-      display: none; /* Oculto por defecto */
+      display: none; /* Oculto al inicio */
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra */
     }
   </style>
 </head>
 <body>
-  <h1>Guía de Productividad</h1> <!-- Título principal -->
+  <h1>Guía de Productividad</h1> <!-- Encabezado principal -->
 
   <div class="container">
-    <!-- Tarjeta del reloj -->
+    <!-- Tarjeta Reloj -->
     <div class="card">
       <h2>Reloj en tiempo real</h2>
-      <div id="clock">--:--:--</div> <!-- Aquí se mostrará la hora -->
+      <div id="clock">--:--:--</div> <!-- Aquí aparece la hora -->
     </div>
 
-    <!-- Tarjeta del cronómetro -->
+    <!-- Tarjeta Cronómetro -->
     <div class="card">
       <h2>Cronómetro</h2>
-      <div id="stopwatch">00:00:00</div> <!-- Tiempo del cronómetro -->
+      <div id="stopwatch">00:00:00</div> <!-- Tiempo -->
       <button onclick="startStopwatch()">Iniciar</button>
       <button onclick="stopStopwatch()">Detener</button>
       <button onclick="resetStopwatch()">Reiniciar</button>
@@ -99,98 +99,106 @@
     <!-- Tarjeta Pomodoro -->
     <div class="card">
       <h2>Pomodoro</h2>
-      <div id="pomodoro">25:00</div> <!-- Tiempo del temporizador -->
+      <div id="pomodoro">25:00</div> <!-- Tiempo -->
       <button onclick="startPomodoro()">Iniciar</button>
       <button onclick="resetPomodoro()">Reiniciar</button>
     </div>
   </div>
 
-  <!-- Notificación -->
+  <!-- Caja de notificación -->
   <div id="notification"></div>
 
+  <!-- 🎵 Sonidos para inicio y fin del Pomodoro -->
+  <audio id="startSound" src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg"></audio>
+  <audio id="endSound" src="https://actions.google.com/sounds/v1/alarms/alarm_clock.ogg"></audio>
+
   <script>
-    /* ======== RELOJ EN TIEMPO REAL ======== */
+    /* ======== RELOJ ======== */
     function updateClock() {
-      const now = new Date(); // Crea un objeto con la fecha/hora actual
-      const timeString = now.toLocaleTimeString(); // Convierte la hora a formato legible
-      document.getElementById("clock").textContent = timeString; // Muestra en pantalla
+      const now = new Date(); // Fecha y hora actuales
+      const timeString = now.toLocaleTimeString(); // Convierte a formato HH:MM:SS
+      document.getElementById("clock").textContent = timeString; // Lo pone en pantalla
     }
     setInterval(updateClock, 1000); // Actualiza cada segundo
 
     /* ======== CRONÓMETRO ======== */
-    let stopwatchInterval; // Guardará el intervalo
-    let stopwatchSeconds = 0; // Tiempo en segundos
+    let stopwatchInterval;
+    let stopwatchSeconds = 0;
 
     function startStopwatch() {
-      clearInterval(stopwatchInterval); // Evita intervalos duplicados
+      clearInterval(stopwatchInterval); // Evita duplicados
       stopwatchInterval = setInterval(() => {
         stopwatchSeconds++; // Aumenta el contador
-        displayStopwatch(); // Muestra el tiempo
+        displayStopwatch();
       }, 1000);
     }
 
     function stopStopwatch() {
-      clearInterval(stopwatchInterval); // Pausa el cronómetro
+      clearInterval(stopwatchInterval); // Pausa
     }
 
     function resetStopwatch() {
-      clearInterval(stopwatchInterval); // Detiene
-      stopwatchSeconds = 0; // Reinicia el tiempo
-      displayStopwatch(); // Muestra 00:00:00
+      clearInterval(stopwatchInterval);
+      stopwatchSeconds = 0; // Reinicia tiempo
+      displayStopwatch();
     }
 
     function displayStopwatch() {
-      const hours = String(Math.floor(stopwatchSeconds / 3600)).padStart(2, '0'); // Calcula horas
-      const minutes = String(Math.floor((stopwatchSeconds % 3600) / 60)).padStart(2, '0'); // Calcula minutos
-      const seconds = String(stopwatchSeconds % 60).padStart(2, '0'); // Calcula segundos
-      document.getElementById("stopwatch").textContent = `${hours}:${minutes}:${seconds}`; // Muestra
+      const hours = String(Math.floor(stopwatchSeconds / 3600)).padStart(2, '0');
+      const minutes = String(Math.floor((stopwatchSeconds % 3600) / 60)).padStart(2, '0');
+      const seconds = String(stopwatchSeconds % 60).padStart(2, '0');
+      document.getElementById("stopwatch").textContent = `${hours}:${minutes}:${seconds}`;
     }
 
     /* ======== POMODORO ======== */
-    let pomodoroInterval; // Guardará el intervalo
-    let pomodoroTime = 25 * 60; // 25 minutos en segundos
+    let pomodoroInterval;
+    let pomodoroTime = 25 * 60;
 
     function startPomodoro() {
-      clearInterval(pomodoroInterval); // Evita duplicados
+      clearInterval(pomodoroInterval);
+      document.getElementById("startSound").play(); // 🔊 Reproduce sonido de inicio
       pomodoroInterval = setInterval(() => {
-        pomodoroTime--; // Resta tiempo
-        displayPomodoro(); // Muestra en pantalla
+        pomodoroTime--;
+        displayPomodoro();
 
         if (pomodoroTime <= 60) {
-          document.getElementById("pomodoro").classList.add("pulse"); // Activa pulso
+          document.getElementById("pomodoro").classList.add("pulse");
         }
 
         if (pomodoroTime <= 0) {
-          clearInterval(pomodoroInterval); // Detiene
-          showNotification("¡Tiempo terminado! Tómate un tintico ☕"); // Notifica
-          resetPomodoro(); // Reinicia
+          clearInterval(pomodoroInterval);
+          document.getElementById("endSound").play(); // 🔊 Sonido de fin
+          showNotification("¡Tiempo terminado! Tómate un tintico ☕");
+          resetPomodoro();
         }
       }, 1000);
     }
 
     function resetPomodoro() {
-      clearInterval(pomodoroInterval); // Detiene
-      pomodoroTime = 25 * 60; // Restaura 25 min
-      displayPomodoro(); // Muestra tiempo
-      document.getElementById("pomodoro").classList.remove("pulse"); // Quita pulso
+      clearInterval(pomodoroInterval);
+      pomodoroTime = 25 * 60;
+      displayPomodoro();
+      document.getElementById("pomodoro").classList.remove("pulse");
     }
 
     function displayPomodoro() {
-      const minutes = String(Math.floor(pomodoroTime / 60)).padStart(2, '0'); // Calcula minutos
-      const seconds = String(pomodoroTime % 60).padStart(2, '0'); // Calcula segundos
-      document.getElementById("pomodoro").textContent = `${minutes}:${seconds}`; // Muestra
+      const minutes = String(Math.floor(pomodoroTime / 60)).padStart(2, '0');
+      const seconds = String(pomodoroTime % 60).padStart(2, '0');
+      document.getElementById("pomodoro").textContent = `${minutes}:${seconds}`;
     }
 
     /* ======== NOTIFICACIÓN ======== */
     function showNotification(message) {
-      const notif = document.getElementById("notification"); // Obtiene el div
-      notif.textContent = message; // Texto
-      notif.style.display = "block"; // Lo muestra
-      setTimeout(() => notif.style.display = "none", 4000); // Lo oculta después de 4 seg
+      const notif = document.getElementById("notification");
+      notif.textContent = message;
+      notif.style.display = "block";
+      setTimeout(() => notif.style.display = "none", 4000);
     }
   </script>
 </body>
 </html>
+
+
 
 
 
