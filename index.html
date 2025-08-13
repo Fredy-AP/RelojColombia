@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -8,8 +9,8 @@
     /* ======== ESTILOS GENERALES ======== */
     body {
       font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #006400, #3cb371, #ffffff); /* Degradado de verde a blanco */
-      color: #333; /* Texto oscuro para contraste */
+      background: linear-gradient(135deg, #006400, #3cb371, #ffffff);
+      color: #333;
       margin: 0;
       padding: 0;
       text-align: center;
@@ -18,7 +19,7 @@
     h1 {
       margin-top: 20px;
       font-size: 2.5rem;
-      color: #004d00; /* Verde oscuro */
+      color: #004d00;
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
     }
 
@@ -31,7 +32,7 @@
     }
 
     .card {
-      background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco semitransparente */
+      background-color: rgba(255, 255, 255, 0.9);
       border-radius: 15px;
       padding: 20px;
       width: 280px;
@@ -39,7 +40,7 @@
     }
 
     button {
-      background-color: #008000; /* Verde vibrante */
+      background-color: #008000;
       color: white;
       border: none;
       padding: 10px 20px;
@@ -50,7 +51,7 @@
     }
 
     button:hover {
-      background-color: #006400; /* Verde más oscuro al pasar */
+      background-color: #006400;
     }
 
     /* Efecto pulso para últimos segundos del Pomodoro */
@@ -69,7 +70,7 @@
       position: fixed;
       bottom: 20px;
       right: 20px;
-      background-color: #008000; /* Fondo verde */
+      background-color: #008000;
       color: white;
       padding: 15px;
       border-radius: 8px;
@@ -149,10 +150,32 @@
     /* ======== POMODORO ======== */
     let pomodoroInterval;
     let pomodoroTime = 25 * 60;
+    const initialPomodoroTime = 25 * 60;
+
+    // Al cargar la página, revisamos si hay un tiempo guardado
+    window.onload = function() {
+        const savedEndTime = localStorage.getItem('pomodoroEndTime');
+        if (savedEndTime) {
+            const remainingTime = Math.floor((savedEndTime - Date.now()) / 1000);
+            if (remainingTime > 0) {
+                pomodoroTime = remainingTime;
+                startPomodoro();
+            } else {
+                // Si el tiempo ya se agotó, notificamos y reiniciamos
+                showNotification("¡Tiempo terminado! Tómate un tintico ☕");
+                resetPomodoro();
+            }
+        }
+    }
 
     function startPomodoro() {
       clearInterval(pomodoroInterval);
       document.getElementById("startSound").play();
+
+      // Guardamos la hora de finalización en localStorage
+      const endTime = Date.now() + pomodoroTime * 1000;
+      localStorage.setItem('pomodoroEndTime', endTime);
+
       pomodoroInterval = setInterval(() => {
         pomodoroTime--;
         displayPomodoro();
@@ -172,9 +195,10 @@
 
     function resetPomodoro() {
       clearInterval(pomodoroInterval);
-      pomodoroTime = 25 * 60;
+      pomodoroTime = initialPomodoroTime;
       displayPomodoro();
       document.getElementById("pomodoro").classList.remove("pulse");
+      localStorage.removeItem('pomodoroEndTime'); // Borramos el tiempo guardado
     }
 
     function displayPomodoro() {
@@ -193,6 +217,7 @@
   </script>
 </body>
 </html>
+
 
 
 
