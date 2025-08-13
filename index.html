@@ -7,88 +7,90 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- El título que sale en la pestaña, ¿si ve? -->
   <title>Guía de Productividad </title>
-  <style>
-    /* ======== ACÁ VAN TODOS LOS ESTILOS PA QUE SE VEA BONITO ======== */
-    
-    /* El body es todo el cuerpo de la página, parce */
-    body {
-        font-family: 'Inter', 'Roboto', Arial, sans-serif; /* Tipografía moderna */
-        background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); /* Degradado fresco y tech */
-        color: #1a1a1a; /* Texto gris muy oscuro para buen contraste */
-        margin: 0;
-        padding: 0;
-        text-align: center;
-}
+ <style>
+  /* ======== ESTILOS MODERNOS AL ESTILO APP USA ======== */
 
+  /* Fondo claro y tipografía limpia */
+  body {
+      font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif; /* Fuente común en webs y apps USA */
+      background: linear-gradient(135deg, #f5f5f5 0%, #ffffff 50%, #f0f0f0 100%); /* Degradado gris claro */
+      color: #1a1a1a; /* Texto gris muy oscuro */
+      margin: 0;
+      padding: 0;
+      text-align: center;
+  }
 
-    /* El título principal, ¡qué gonorrea tan grande! */
-    h1 {
-      margin-top: 20px; /* Un poquito de espacio arriba */
-      font-size: 2.5rem; /* Bien grandote el parcero */
-      color: #004d00; /* Verde oscuro pa que se vea serio */
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Una sombrita pa que se vea pro */
-    }
+  /* Título principal */
+  h1 {
+    margin-top: 20px;
+    font-size: 2.8rem;
+    color: #2c2c2c; /* Gris oscuro */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.05); /* Sombra muy suave */
+    font-weight: 700;
+  }
 
-    /* El contenedor donde van todas las tarjetas */
-    .container {
-      display: flex; /* Pa que se acomoden bonito las tarjetas */
-      flex-wrap: wrap; /* Si no caben, que se bajen pa la siguiente fila */
-      justify-content: center; /* Todas centraditas */
-      gap: 20px; /* Un espaciecito entre cada una */
-      margin-top: 30px; /* Separación del título */
-    }
+  /* Contenedor de tarjetas */
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+    margin-top: 35px;
+  }
 
-    /* Cada tarjetita individual */
-    .card {
-      background-color: rgba(255, 255, 255, 0.9); /* Blanco transparente, se ve fino */
-      border-radius: 15px; /* Esquinitas redondeadas */
-      padding: 20px; /* Espaciecito por dentro */
-      width: 280px; /* Ancho fijo pa que todas sean iguales */
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra pa que se vea que "flota" */
-    }
+  /* Tarjetas estilo limpio */
+  .card {
+    background-color: white;
+    border-radius: 12px;
+    padding: 20px;
+    width: 280px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+  }
 
-    /* Los botones, ¡qué chimba! */
-    button {
-      background-color: #008000; /* Verde esperanza */
-      color: white; /* Letras blancas pa que contrasten */
-      border: none; /* Sin borde, queda más limpio */
-      padding: 10px 20px; /* Espaciecito dentro del botón */
-      margin-top: 10px; /* Un poquito de separación arriba */
-      border-radius: 8px; /* Esquinitas redondeadas también */
-      cursor: pointer; /* Pa que aparezca la manito cuando pase el mouse */
-      font-weight: bold; /* Letras gorditas */
-    }
+  /* Botones estilo corporativo */
+  button {
+    background-color: #007BFF; /* Azul estándar apps USA */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
 
-    /* Cuando pase el mouse por encima del botón */
-    button:hover {
-      background-color: #006400; /* Se pone un poquito más oscuro */
-    }
+  button:hover {
+    background-color: #0056b3; /* Azul más oscuro al pasar */
+  }
 
-    /* Efecto pulso pa los últimos segundos del Pomodoro - ¡Se pone nervioso! */
-    .pulse {
-      animation: pulse 1s infinite; /* La animación dura 1 segundo y se repite infinito */
-    }
+  /* Pulso para Pomodoro */
+  .pulse {
+    animation: pulse 1s infinite;
+  }
 
-    /* Definimos cómo es la animación del pulso */
-    @keyframes pulse {
-      0% { transform: scale(1); } /* Empieza normal */
-      50% { transform: scale(1.1); } /* A la mitad se agranda */
-      100% { transform: scale(1); } /* Vuelve al tamaño normal */
-    }
+  @keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.08); }
+    100% { transform: scale(1); }
+  }
 
-    /* La cajita de notificaciones que aparece abajo a la derecha */
-    #notification {
-      position: fixed; /* Se queda pegada en un lugar fijo */
-      bottom: 20px; /* 20px desde abajo */
-      right: 20px; /* 20px desde la derecha */
-      background-color: #008000; /* Verde esperanza */
-      color: white; /* Letras blancas */
-      padding: 15px; /* Espaciecito por dentro */
-      border-radius: 8px; /* Esquinitas redondeadas */
-      display: none; /* Al principio está escondida */
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombrita pa que se vea pro */
-    }
-  </style>
+  /* Notificaciones */
+  #notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #007BFF;
+    color: white;
+    padding: 15px;
+    border-radius: 6px;
+    display: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    font-weight: 500;
+  }
+</style>
+
 </head>
 <body>
   <!-- El título principal de nuestra aplicación -->
@@ -395,6 +397,7 @@
   </script>
 </body>
 </html>
+
 
 
 
