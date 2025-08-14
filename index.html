@@ -295,8 +295,11 @@
         <div id="pomodoroStatus" style="margin-top: 10px; font-weight: 500; color: #3b82f6;">Listo para comenzar</div>
       </div>
       <!-- Botones pa manejar el Pomodoro como todo un berraco -->
-      <button class="btn" onclick="startPomodoro()" id="startPomodoroBtn">Iniciar Sesión</button>
-      <button class="btn" onclick="resetPomodoro()" id="resetPomodoroBtn">Reiniciar Todo</button>
+      <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;">
+        <button class="btn" onclick="startPomodoro()" id="startPomodoroBtn">Iniciar</button>
+        <button class="btn" onclick="pausePomodoro()" id="pausePomodoroBtn">Pausar</button>
+        <button class="btn" onclick="resetPomodoro()" id="resetPomodoroBtn">Reiniciar</button>
+      </div>
     </div>
   </div>
 
@@ -476,6 +479,8 @@
     let isBreakTime = false;
     // Contador de pomodoros completados
     let pomodoroCount = 0;
+    // Variable pa saber si el pomodoro está pausado
+    let isPaused = false;
 
     // Esta función se ejecuta cuando carga la página como un campeón
     window.onload = function() {
@@ -486,6 +491,7 @@
       isBreakTime = localStorage.getItem('isBreakTime') === 'true';
       document.getElementById('pomodoroCount').textContent = pomodoroCount;
       updatePomodoroStatus();
+      updatePomodoroButtons(); // Actualizamos el estado de los botones
       
       // Revisamos si hay un Pomodoro corriendo guardado en el navegador
       const savedEndTime = localStorage.getItem('pomodoroEndTime');
@@ -561,10 +567,18 @@
     }
     // Función pa iniciar el Pomodoro como todo un profesional
     function startPomodoro() {
+      // Si ya está corriendo, no hacemos nada
+      if (pomodoroInterval && !isPaused) {
+        showNotification("¡El Pomodoro ya está corriendo, parcero!");
+        return;
+      }
+      
+      isPaused = false; // Quitamos la pausa
       clearInterval(pomodoroInterval); // Limpiamos cualquier intervalo anterior
       
       // Reproducimos el sonido de inicio una sola vez pa motivarse
       playStartSound();
+      updatePomodoroButtons(); // Actualizamos los botones
 
       // Calculamos cuándo va a terminar y lo guardamos pa otras pestañas
       const endTime = Date.now() + pomodoroTime * 1000;
@@ -592,6 +606,53 @@
           handlePomodoroComplete(); // Manejamos la finalización como unos berracos
         }
       }, 1000); // Cada segundo como un reloj suizo
+    }
+
+    // Función pa pausar el Pomodoro cuando se necesite
+    function pausePomodoro() {
+      if (pomodoroInterval && !isPaused) {
+        // Pausamos el pomodoro
+        clearInterval(pomodoroInterval);
+        isPaused = true;
+        localStorage.removeItem('pomodoroEndTime'); // Quitamos el tiempo final
+        localStorage.removeItem('pomodoroStartTime');
+        showNotification("Pomodoro pausado. Presiona 'Iniciar' para continuar.");
+        updatePomodoroButtons();
+        console.log("Pomodoro pausado como un campeón");
+      } else if (isPaused) {
+        showNotification("El Pomodoro ya está pausado, parcero.");
+      } else {
+        showNotification("No hay ningún Pomodoro corriendo para pausar.");
+      }
+    }
+
+    // Función pa actualizar el estado de los botones
+    function updatePomodoroButtons() {
+      const startBtn = document.getElementById('startPomodoroBtn');
+      const pauseBtn = document.getElementById('pausePomodoroBtn');
+      
+      if (pomodoroInterval && !isPaused) {
+        // Está corriendo
+        startBtn.textContent = 'Corriendo';
+        startBtn.disabled = true;
+        startBtn.style.opacity = '0.6';
+        pauseBtn.disabled = false;
+        pauseBtn.style.opacity = '1';
+      } else if (isPaused) {
+        // Está pausado
+        startBtn.textContent = 'Continuar';
+        startBtn.disabled = false;
+        startBtn.style.opacity = '1';
+        pauseBtn.disabled = true;
+        pauseBtn.style.opacity = '0.6';
+      } else {
+        // Está detenido
+        startBtn.textContent = 'Iniciar';
+        startBtn.disabled = false;
+        startBtn.style.opacity = '1';
+        pauseBtn.disabled = true;
+        pauseBtn.style.opacity = '0.6';
+      }
     }
 
     // Función pa manejar cuando se completa un pomodoro o descanso
@@ -703,7 +764,6 @@
   </script>
 </body>
 </html>
-
 
 
 
