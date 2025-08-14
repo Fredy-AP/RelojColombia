@@ -17,7 +17,7 @@
   body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
       background: linear-gradient(135deg, #f8fafc 0%, #ffffff 50%, #f1f5f9 100%);
-      color: black;
+      color: #1e293b;
       margin: 0;
       padding: 0;
       line-height: 1.6;
@@ -568,16 +568,22 @@
     // Función pa iniciar el Pomodoro como todo un profesional
     function startPomodoro() {
       // Si ya está corriendo, no hacemos nada
-      if (pomodoroInterval && !isPaused) {
+      if (pomodoroInterval) {
         showNotification("¡El Pomodoro ya está corriendo, parcero!");
         return;
       }
       
-      isPaused = false; // Quitamos la pausa
-      clearInterval(pomodoroInterval); // Limpiamos cualquier intervalo anterior
+      // Si está pausado, continuamos desde donde quedamos
+      if (isPaused) {
+        isPaused = false;
+        showNotification("Continuando Pomodoro desde donde quedaste...");
+        console.log("Continuando desde: " + pomodoroTime + " segundos restantes");
+      } else {
+        // Si es nuevo, reproducimos sonido de inicio
+        playStartSound();
+        showNotification("Iniciando nueva sesión de " + (isBreakTime ? "descanso" : "trabajo") + "...");
+      }
       
-      // Reproducimos el sonido de inicio una sola vez pa motivarse
-      playStartSound();
       updatePomodoroButtons(); // Actualizamos los botones
 
       // Calculamos cuándo va a terminar y lo guardamos pa otras pestañas
@@ -599,6 +605,7 @@
         // Si se acabó el tiempo, ¡celebramos o descansamos!
         if (pomodoroTime <= 0) {
           clearInterval(pomodoroInterval); // Paramos el conteo
+          pomodoroInterval = null; // Limpiamos la variable
           
           // Sonido de que terminó cinco veces como los campeones
           playEndSounds();
@@ -610,19 +617,19 @@
 
     // Función pa pausar el Pomodoro cuando se necesite
     function pausePomodoro() {
-      if (pomodoroInterval && !isPaused) {
+      if (pomodoroInterval) {
         // Pausamos el pomodoro
         clearInterval(pomodoroInterval);
+        pomodoroInterval = null; // Limpiamos la variable del intervalo
         isPaused = true;
-        localStorage.removeItem('pomodoroEndTime'); // Quitamos el tiempo final
+        // Quitamos los datos de sincronización pa que no se reanude automáticamente
+        localStorage.removeItem('pomodoroEndTime'); 
         localStorage.removeItem('pomodoroStartTime');
-        showNotification("Pomodoro pausado. Presiona 'Iniciar' para continuar.");
+        showNotification("Pomodoro pausado. Presiona 'Iniciar' para continuar donde quedaste.");
         updatePomodoroButtons();
-        console.log("Pomodoro pausado como un campeón");
-      } else if (isPaused) {
-        showNotification("El Pomodoro ya está pausado, parcero.");
+        console.log("Pomodoro pausado como un campeón, tiempo actual: " + pomodoroTime + " segundos");
       } else {
-        showNotification("No hay ningún Pomodoro corriendo para pausar.");
+        showNotification("No hay ningún Pomodoro corriendo para pausar, parcero.");
       }
     }
 
@@ -631,33 +638,40 @@
       const startBtn = document.getElementById('startPomodoroBtn');
       const pauseBtn = document.getElementById('pausePomodoroBtn');
       
-      if (pomodoroInterval && !isPaused) {
-        // Está corriendo
+      if (pomodoroInterval) {
+        // Está corriendo activamente
         startBtn.textContent = 'Corriendo';
         startBtn.disabled = true;
         startBtn.style.opacity = '0.6';
+        startBtn.style.cursor = 'not-allowed';
         pauseBtn.disabled = false;
         pauseBtn.style.opacity = '1';
+        pauseBtn.style.cursor = 'pointer';
       } else if (isPaused) {
         // Está pausado
         startBtn.textContent = 'Continuar';
         startBtn.disabled = false;
         startBtn.style.opacity = '1';
+        startBtn.style.cursor = 'pointer';
         pauseBtn.disabled = true;
         pauseBtn.style.opacity = '0.6';
+        pauseBtn.style.cursor = 'not-allowed';
       } else {
-        // Está detenido
+        // Está completamente detenido
         startBtn.textContent = 'Iniciar';
         startBtn.disabled = false;
         startBtn.style.opacity = '1';
+        startBtn.style.cursor = 'pointer';
         pauseBtn.disabled = true;
         pauseBtn.style.opacity = '0.6';
+        pauseBtn.style.cursor = 'not-allowed';
       }
     }
 
     // Función pa manejar cuando se completa un pomodoro o descanso
     function handlePomodoroComplete() {
       document.getElementById("pomodoro").classList.remove("pulse"); // Quitamos el efecto pulso
+      isPaused = false; // Ya no está pausado porque terminó
       
       if (isBreakTime) {
         // Si terminó el descanso, volvemos al trabajo
@@ -665,6 +679,7 @@
         pomodoroTime = initialPomodoroTime; // 25 minutos de trabajo
         showNotification("¡Descanso terminado! Es hora de volver al trabajo con toda la energía.");
         updatePomodoroStatus();
+        updatePomodoroButtons(); // Actualizamos botones
         
         // Empezamos automáticamente el siguiente pomodoro después de mostrar la notificación
         setTimeout(() => {
@@ -681,6 +696,7 @@
         pomodoroTime = breakTime; // 5 minutos de descanso
         showNotification(`¡Pomodoro #${pomodoroCount} completado! Toma tu descanso de 5 minutos.`);
         updatePomodoroStatus();
+        updatePomodoroButtons(); // Actualizamos botones
         
         // Empezamos automáticamente el descanso después de mostrar la notificación
         setTimeout(() => {
