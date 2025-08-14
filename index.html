@@ -409,6 +409,36 @@
       box-shadow: 0 2px 8px rgba(13, 71, 161, 0.3);
     }
 
+    .timezone-selector {
+      background: rgba(255, 255, 255, 0.2) !important;
+      color: white !important;
+      border: 1px solid rgba(255, 255, 255, 0.3) !important;
+      padding: 12px 16px !important;
+      border-radius: 15px !important;
+      font-size: 1rem !important;
+      cursor: pointer !important;
+      backdrop-filter: blur(5px) !important;
+      transition: all 0.3s ease !important;
+      min-width: 200px !important;
+    }
+
+    .timezone-selector:hover {
+      background: rgba(255, 255, 255, 0.3) !important;
+      transform: translateY(-1px) !important;
+    }
+
+    .timezone-selector:focus {
+      outline: none !important;
+      background: rgba(255, 255, 255, 0.4) !important;
+      box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5) !important;
+    }
+
+    .timezone-selector option {
+      background: #1a1a2e !important;
+      color: white !important;
+      padding: 10px !important;
+    }
+
     @media (max-width: 768px) {
       .timer-display, .clock-display, .stopwatch-display {
         font-size: 3rem;
@@ -448,24 +478,27 @@
   <div class="main-content">
     <!-- Reloj Mundial - Arriba -->
     <div class="tool-container" id="clock">
-      <h2>🕐 Reloj Mundial</h2>
+      <h2>Reloj Mundial</h2>
       <div class="clock-display" id="clockDisplay">00:00:00</div>
       <div class="session-type" id="dateDisplay">Fecha</div>
       <div class="controls">
-        <select id="timezoneSelect">
-          <option value="America/Bogota" selected>Bogotá</option>
+        <!-- Mejorado el selector de timezone con mejor estilo y funcionalidad -->
+        <select id="timezoneSelect" class="timezone-selector">
+          <option value="America/Bogota">Bogotá</option>
           <option value="America/New_York">Nueva York</option>
           <option value="America/Los_Angeles">Los Ángeles</option>
           <option value="Europe/London">Londres</option>
           <option value="Europe/Madrid">Madrid</option>
           <option value="Asia/Tokyo">Tokio</option>
+          <option value="Asia/Shanghai">Shanghai</option>
+          <option value="Australia/Sydney">Sídney</option>
         </select>
       </div>
     </div>
 
     <!-- Temporizador Pomodoro - Centro -->
     <div class="tool-container" id="pomodoro">
-      <h2>🍅 Temporizador Pomodoro</h2>
+      <h2>Temporizador Pomodoro</h2>
       <div class="session-type" id="sessionType">Trabajo - 25 minutos</div>
       <div class="timer-display" id="timerDisplay">25:00</div>
       <div class="progress-bar">
@@ -483,7 +516,7 @@
 
     <!-- Cronómetro - Abajo -->
     <div class="tool-container" id="stopwatch">
-      <h2>⏱️ Cronómetro</h2>
+      <h2>Cronómetro</h2>
       <div class="stopwatch-display" id="stopwatchDisplay">00:00:00</div>
       <div class="controls">
         <button id="stopwatchStartBtn">Iniciar</button>
@@ -781,7 +814,7 @@
       if (clockInterval) clearInterval(clockInterval);
       clockInterval = setInterval(updateClock, 1000);
       
-      // Escuchar cambios de zona horaria
+      timezoneSelect.removeEventListener('change', updateClock);
       timezoneSelect.addEventListener('change', updateClock);
     }
 
