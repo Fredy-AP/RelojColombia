@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2339538708404792"
-     crossorigin="anonymous"></script>
   <!-- Este meta charset es pa que no se dañen los caracteres especiales -->
   <meta charset="UTF-8">
   <!-- Pa que se vea bacano en todos los dispositivos móviles -->
@@ -297,8 +295,8 @@
         <div id="pomodoroStatus" style="margin-top: 10px; font-weight: 500; color: #3b82f6;">Listo para comenzar</div>
       </div>
       <!-- Botones pa manejar el Pomodoro como todo un berraco -->
-      <button class="btn" onclick="startPomodoro()">Iniciar Sesión</button>
-      <button class="btn" onclick="resetPomodoro()">Reiniciar</button>
+      <button class="btn" onclick="startPomodoro()" id="startPomodoroBtn">Iniciar Sesión</button>
+      <button class="btn" onclick="resetPomodoro()" id="resetPomodoroBtn">Reiniciar Todo</button>
     </div>
   </div>
 
@@ -509,7 +507,12 @@
           } else {
             showNotification("¡Excelente! Tu sesión Pomodoro ha finalizado. Es momento de tomar un descanso merecido.");
           }
-          handlePomodoroComplete();
+          // Reproducimos los sonidos de finalización antes de continuar
+          playEndSounds();
+          // Esperamos un poco antes de procesar la finalización
+          setTimeout(() => {
+            handlePomodoroComplete();
+          }, 2000);
         }
       }
       
@@ -527,15 +530,41 @@
       }
     }
 
+    // Función pa reproducir sonido una sola vez
+    function playStartSound() {
+      const startSound = document.getElementById("startSound");
+      startSound.currentTime = 0; // Reiniciamos el sonido pa que suene desde el principio
+      startSound.play().catch(() => {
+        console.log("No se pudo reproducir el sonido de inicio, pero seguimos como unos berracos");
+      });
+    }
+
+    // Función pa reproducir sonido cinco veces cuando termine algo
+    function playEndSounds() {
+      const endSound = document.getElementById("endSound");
+      let playCount = 0;
+      
+      function playNext() {
+        if (playCount < 5) {
+          endSound.currentTime = 0; // Reiniciamos el sonido
+          endSound.play().then(() => {
+            playCount++;
+            // Esperamos que termine el sonido antes del siguiente
+            setTimeout(playNext, 800); // 800ms entre sonidos pa que se escuche bien
+          }).catch(() => {
+            console.log(`No se pudo reproducir el sonido ${playCount + 1}, pero seguimos adelante`);
+          });
+        }
+      }
+      
+      playNext(); // Empezamos la secuencia de sonidos como unos profesionales
+    }
     // Función pa iniciar el Pomodoro como todo un profesional
     function startPomodoro() {
       clearInterval(pomodoroInterval); // Limpiamos cualquier intervalo anterior
       
-      // Reproducimos el sonido de inicio pa motivarse
-      const startSound = document.getElementById("startSound");
-      startSound.play().catch(() => {
-        console.log("No se pudo reproducir el sonido, pero seguimos adelante");
-      });
+      // Reproducimos el sonido de inicio una sola vez pa motivarse
+      playStartSound();
 
       // Calculamos cuándo va a terminar y lo guardamos pa otras pestañas
       const endTime = Date.now() + pomodoroTime * 1000;
@@ -557,11 +586,8 @@
         if (pomodoroTime <= 0) {
           clearInterval(pomodoroInterval); // Paramos el conteo
           
-          // Sonido de que terminó como los campeones
-          const endSound = document.getElementById("endSound");
-          endSound.play().catch(() => {
-            console.log("No se pudo reproducir el sonido, pero terminamos exitosamente");
-          });
+          // Sonido de que terminó cinco veces como los campeones
+          playEndSounds();
           
           handlePomodoroComplete(); // Manejamos la finalización como unos berracos
         }
@@ -579,10 +605,10 @@
         showNotification("¡Descanso terminado! Es hora de volver al trabajo con toda la energía.");
         updatePomodoroStatus();
         
-        // Empezamos automáticamente el siguiente pomodoro
+        // Empezamos automáticamente el siguiente pomodoro después de mostrar la notificación
         setTimeout(() => {
           startPomodoro();
-        }, 2000); // Esperamos 2 segundos pa que lean la notificación
+        }, 3000); // Esperamos 3 segundos pa que lean la notificación y escuchen los sonidos
         
       } else {
         // Si terminó el trabajo, empezamos el descanso
@@ -595,10 +621,10 @@
         showNotification(`¡Pomodoro #${pomodoroCount} completado! Toma tu descanso de 5 minutos.`);
         updatePomodoroStatus();
         
-        // Empezamos automáticamente el descanso
+        // Empezamos automáticamente el descanso después de mostrar la notificación
         setTimeout(() => {
           startPomodoro();
-        }, 2000); // Esperamos 2 segundos pa que lean la notificación
+        }, 3000); // Esperamos 3 segundos pa que lean la notificación y escuchen los sonidos
       }
       
       // Actualizamos el localStorage con el estado actual
@@ -677,10 +703,6 @@
   </script>
 </body>
 </html>
-
-
-
-
 
 
 
