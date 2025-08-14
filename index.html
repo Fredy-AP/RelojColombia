@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Suite de Productividad con Temporizador Pomodoro, Reloj Mundial y Cronómetro">
-  <title>Suite de Productividad</title>
+  <title>Suite de Productividad - Pomodoro, Reloj y Cronómetro</title>
+  <meta name="description" content="Herramientas gratuitas de productividad: Temporizador Pomodoro, reloj mundial y cronómetro. Mejora tu concentración y gestión del tiempo.">
+  <meta name="keywords" content="pomodoro, productividad, gestión tiempo, concentración, cronómetro, reloj">
   <style>
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
@@ -50,6 +51,8 @@
       align-items: center;
       gap: 30px;
       padding: 20px;
+      max-width: 500px;
+      margin: 0 auto;
     }
 
     .tools-layout {
@@ -70,9 +73,8 @@
       text-align: center;
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
       border: 1px solid rgba(255, 255, 255, 0.2);
-      max-width: 400px;
       width: 100%;
-      display: none;
+      max-width: 450px;
     }
 
     .tool-container.active {
@@ -115,29 +117,6 @@
       background: white;
       border-radius: 50%;
       cursor: pointer;
-    }
-
-    .pomodoro-container {
-      background: white;
-      border-radius: 20px;
-      padding: 40px;
-      width: 100%;
-      max-width: 500px;
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-      border: 1px solid rgba(59, 130, 246, 0.1);
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .pomodoro-container::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 6px;
-      background: linear-gradient(90deg, #3b82f6, #1d4ed8);
     }
 
     .timer-display {
@@ -282,27 +261,6 @@
       to { transform: translateX(0); opacity: 1; }
     }
 
-    .instructions {
-      background: white;
-      border-radius: 16px;
-      padding: 30px;
-      margin-top: 30px;
-      width: 100%;
-      max-width: 600px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-      border-left: 6px solid #3b82f6;
-    }
-
-    .instructions h3 {
-      color: #1e293b;
-      margin-bottom: 15px;
-    }
-
-    .instructions ul {
-      text-align: left;
-      line-height: 1.8;
-    }
-
     .progress-bar {
       width: 100%;
       background-color: #ddd;
@@ -318,25 +276,12 @@
       transition: width 0.5s ease;
     }
 
-    .info-section {
-      background: white;
-      border-radius: 16px;
-      padding: 30px;
-      margin-top: 30px;
-      width: 100%;
-      max-width: 600px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-      border-left: 6px solid #3b82f6;
+    .work-mode {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     }
 
-    .info-section h2 {
-      color: #1e293b;
-      margin-bottom: 15px;
-    }
-
-    .info-section ul {
-      text-align: left;
-      line-height: 1.8;
+    .break-mode {
+      background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
     }
 
     @media (max-width: 768px) {
@@ -367,252 +312,116 @@
     <p>Herramientas profesionales para mejorar tu concentración y gestión del tiempo</p>
   </div>
 
-  <div class="nav-tabs">
-    <button class="tab-btn active" onclick="showTool('all')">📱 Todas las Herramientas</button>
-    <button class="tab-btn" onclick="showTool('pomodoro')">🍅 Solo Pomodoro</button>
-    <button class="tab-btn" onclick="showTool('clock')">🕐 Solo Reloj</button>
-    <button class="tab-btn" onclick="showTool('stopwatch')">⏱️ Solo Cronómetro</button>
-  </div>
-
   <div class="main-content">
-    <div class="tools-layout">
-      <div class="tool-container active clock-container" id="clock">
-        <h2>🕐 Reloj </h2>
-        <div class="clock-display" id="clockDisplay">00:00:00</div>
-        <div class="session-type" id="dateDisplay">Fecha</div>
-        <div class="controls">
-          <select id="timezoneSelect" style="background: rgba(255,255,255,0.2); color: white; border: 1px solid rgba(255,255,255,0.3); padding: 10px; border-radius: 15px;">
-            <option value="America/Bogota" selected>Bogotá</option>
-            <option value="America/New_York">Nueva York</option>
-            <option value="America/Los_Angeles">Los Ángeles</option>
-            <option value="Europe/London">Londres</option>
-            <option value="Europe/Madrid">Madrid</option>
-            <option value="Asia/Tokyo">Tokio</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="tool-container active pomodoro-container" id="pomodoro">
-        <h2>🍅 Temporizador Pomodoro</h2>
-        <div class="session-type" id="sessionType">Trabajo - 25 minutos</div>
-        <div class="timer-display" id="timerDisplay">25:00</div>
-        <div class="progress-bar">
-          <div class="progress-fill" id="progressFill"></div>
-        </div>
-        <div class="controls">
-          <button id="startBtn">Iniciar</button>
-          <button id="pauseBtn" disabled>Pausar</button>
-          <button id="resetBtn">Reiniciar</button>
-        </div>
-        <div class="sound-controls">
-          <span>🔊 Volumen:</span>
-          <input type="range" id="volumeSlider" class="volume-slider" min="0" max="100" value="50">
-          <button id="testSoundBtn" style="padding: 8px 16px; font-size: 0.9rem;">Probar Sonido</button>
-        </div>
-        <div style="margin-top: 15px; font-size: 0.9rem; opacity: 0.8;">
-          Pomodoros completados hoy: <span id="pomodoroCount">0</span>
-        </div>
-      </div>
-
-      <div class="tool-container active stopwatch-container" id="stopwatch">
-        <h2>⏱️ Cronómetro</h2>
-        <div class="stopwatch-display" id="stopwatchDisplay">00:00:00</div>
-        <div class="controls">
-          <button id="stopwatchStartBtn">Iniciar</button>
-          <button id="stopwatchPauseBtn" disabled>Pausar</button>
-          <button id="stopwatchResetBtn">Reiniciar</button>
-          <button id="lapBtn" disabled>Vuelta</button>
-        </div>
-        <div class="laps" id="laps"></div>
+    <!-- Reloj Mundial - Arriba -->
+    <div class="tool-container" id="clock">
+      <h2>🕐 Reloj Mundial</h2>
+      <div class="clock-display" id="clockDisplay">00:00:00</div>
+      <div class="session-type" id="dateDisplay">Fecha</div>
+      <div class="controls">
+        <select id="timezoneSelect" style="background: rgba(255,255,255,0.2); color: white; border: 1px solid rgba(255,255,255,0.3); padding: 10px; border-radius: 15px;">
+          <option value="America/Bogota" selected>Bogotá</option>
+          <option value="America/New_York">Nueva York</option>
+          <option value="America/Los_Angeles">Los Ángeles</option>
+          <option value="Europe/London">Londres</option>
+          <option value="Europe/Madrid">Madrid</option>
+          <option value="Asia/Tokyo">Tokio</option>
+        </select>
       </div>
     </div>
-  </div>
 
-  <div class="info-section">
-    <h2>💻 ¿Cómo funciona este código? (Explicación Colombiana)</h2>
-    <p><strong>¡Ey parcero!</strong> Te voy a explicar cómo está armado este código para que lo entiendas de una:</p>
-    
-    <h3>🏗️ La Estructura (El Esqueleto)</h3>
-    <ul>
-      <li><strong>HTML:</strong> Es como los ladrillos de la casa - define qué va donde</li>
-      <li><strong>CSS:</strong> Es la pintura y decoración - hace que se vea bacano</li>
-      <li><strong>JavaScript:</strong> Es el cerebro - hace que todo funcione</li>
-    </ul>
+    <!-- Temporizador Pomodoro - Centro -->
+    <div class="tool-container" id="pomodoro">
+      <h2>🍅 Temporizador Pomodoro</h2>
+      <div class="session-type" id="sessionType">Trabajo - 25 minutos</div>
+      <div class="timer-display" id="timerDisplay">25:00</div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <div class="controls">
+        <button id="startBtn">Iniciar</button>
+        <button id="pauseBtn" disabled>Pausar</button>
+        <button id="resetBtn">Reiniciar</button>
+      </div>
+      <div class="session-type" style="font-size: 0.9rem; margin-top: 15px;">
+        Pomodoros completados: <span id="pomodoroCount">0</span>
+      </div>
+    </div>
 
-    <h3>🎵 Los Sonidos (La Chimba)</h3>
-    <ul>
-      <li><strong>AudioContext:</strong> Es como un equipo de sonido virtual que crea los pitidos</li>
-      <li><strong>Oscillator:</strong> Genera las frecuencias (los tonos) - cada evento tiene su propio sonido</li>
-      <li><strong>GainNode:</strong> Controla el volumen para que no te reviente los oídos</li>
-    </ul>
-
-    <h3>⏰ El Pomodoro (La Joya de la Corona)</h3>
-    <ul>
-      <li><strong>setInterval:</strong> Es como un despertador que cuenta cada segundo</li>
-      <li><strong>clearInterval:</strong> Para el contador cuando necesitamos</li>
-      <li><strong>localStorage:</strong> Guarda cuántos pomodoros has hecho (como una libreta virtual)</li>
-    </ul>
-
-    <h3>🎨 Los Estilos Bacanos</h3>
-    <ul>
-      <li><strong>backdrop-filter:</strong> Hace ese efecto de vidrio esmerilado que se ve tan pro</li>
-      <li><strong>linear-gradient:</strong> Los degradados que hacen que se vea moderno</li>
-      <li><strong>transform:</strong> Las animaciones cuando pasas el mouse por encima</li>
-    </ul>
-  </div>
-
-  <div class="info-section">
-    <h2>🧠 La Técnica Pomodoro: Maximiza tu Productividad</h2>
-    <p>La Técnica Pomodoro es un método de gestión del tiempo desarrollado por Francesco Cirillo que utiliza intervalos de trabajo de 25 minutos seguidos de descansos de 5 minutos.</p>
-    
-    <h3>¿Cómo funciona?</h3>
-    <ul>
-      <li><strong>25 minutos de trabajo concentrado:</strong> Enfócate en una sola tarea sin distracciones</li>
-      <li><strong>5 minutos de descanso:</strong> Relájate, estírate o toma un café</li>
-      <li><strong>Cada 4 pomodoros:</strong> Toma un descanso largo de 15-30 minutos</li>
-    </ul>
-
-    <h3>Beneficios científicamente probados:</h3>
-    <ul>
-      <li>Mejora la concentración y reduce las distracciones</li>
-      <li>Aumenta la productividad hasta un 40%</li>
-      <li>Reduce el estrés y la fatiga mental</li>
-      <li>Mejora la estimación del tiempo necesario para tareas</li>
-    </ul>
-
-    <h3>💡 Consejos para maximizar tu productividad:</h3>
-    <ul>
-      <li><strong>Planifica tu día:</strong> Lista las tareas antes de empezar</li>
-      <li><strong>Elimina distracciones:</strong> Silencia notificaciones y cierra redes sociales</li>
-      <li><strong>Usa el cronómetro:</strong> Para medir tiempos de tareas específicas</li>
-      <li><strong>Mantén un horario:</strong> El reloj te ayuda a establecer rutinas consistentes</li>
-    </ul>
-
-    <h3>🎯 Técnicas complementarias:</h3>
-    <ul>
-      <li><strong>Time Blocking:</strong> Asigna bloques de tiempo específicos para diferentes actividades</li>
-      <li><strong>Regla 2-2-2:</strong> 2 minutos para emails, 2 horas para trabajo profundo, 2 días para proyectos importantes</li>
-      <li><strong>Matriz de Eisenhower:</strong> Clasifica tareas por urgencia e importancia</li>
-    </ul>
+    <!-- Cronómetro - Abajo -->
+    <div class="tool-container" id="stopwatch">
+      <h2>⏱️ Cronómetro</h2>
+      <div class="stopwatch-display" id="stopwatchDisplay">00:00:00</div>
+      <div class="controls">
+        <button id="stopwatchStartBtn">Iniciar</button>
+        <button id="stopwatchPauseBtn" disabled>Pausar</button>
+        <button id="stopwatchResetBtn">Reiniciar</button>
+        <button id="lapBtn" disabled>Vuelta</button>
+      </div>
+      <div class="laps" id="laps"></div>
+    </div>
   </div>
 
   <div class="notification" id="notification"></div>
 
   <script>
-    let currentTool = 'all';
+    /**
+     * EXPLICACIÓN DEL CÓDIGO EN COLOMBIANO PARA ESTUDIANTES
+     * 
+     * Este código está organizado así, parcero:
+     * 
+     * 1. VARIABLES GLOBALES (línea ~20):
+     *    - Son como cajitas donde guardamos información que necesitamos en toda la aplicación
+     *    - pomodoroTimer: guarda el objeto del temporizador
+     *    - clockInterval: controla el reloj para que se actualice cada segundo
+     * 
+     * 2. CLASES (como moldes para crear objetos):
+     *    - PomodoroTimer: Es el cerebro del pomodoro, maneja todo el rollo del tiempo
+     *    - Stopwatch: Maneja el cronómetro con sus vueltas y eso
+     * 
+     * 3. MÉTODOS IMPORTANTES:
+     *    - constructor(): Es como el "nacimiento" del objeto, aquí se configura todo
+     *    - start(): Arranca el timer, como pisar el acelerador
+     *    - pause(): Para el timer, como pisar el freno
+     *    - reset(): Vuelve todo a cero, como reiniciar el computador
+     * 
+     * 4. SONIDOS:
+     *    - playNotificationSound(): Crea sonidos usando Web Audio API
+     *    - Solo suena cuando se COMPLETA una sesión, no al iniciar
+     * 
+     * 5. ALMACENAMIENTO:
+     *    - localStorage: Guarda datos en el navegador para que no se pierdan
+     */
+
+    // Variables globales - Aquí guardamos todo lo importante, hermano
     let pomodoroTimer, clockInterval, stopwatchInterval;
-    let audioContext;
-    let volume = 0.5;
+    let pomodoroCount = parseInt(localStorage.getItem('pomodoroCount')) || 0;
 
-    function showTool(tool) {
-      const containers = document.querySelectorAll('.tool-container');
-      const buttons = document.querySelectorAll('.tab-btn');
-      
-      containers.forEach(container => container.classList.remove('active'));
-      buttons.forEach(btn => btn.classList.remove('active'));
-      
-      event.target.classList.add('active');
-      
-      if (tool === 'all') {
-        containers.forEach(container => container.classList.add('active'));
-      } else {
-        document.getElementById(tool).classList.add('active');
-      }
-      
-      currentTool = tool;
-      
-      if (tool === 'clock' || tool === 'all') {
-        startClock();
-      }
-    }
-
-    class SoundManager {
-      constructor() {
-        this.initAudio();
-        this.setupVolumeControl();
-      }
-
-      initAudio() {
-        try {
-          this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
-        } catch (e) {
-          console.log('Audio no disponible');
-        }
-      }
-
-      setupVolumeControl() {
-        const volumeSlider = document.getElementById('volumeSlider');
-        const testSoundBtn = document.getElementById('testSoundBtn');
-        
-        volumeSlider.addEventListener('input', (e) => {
-          volume = e.target.value / 100;
-        });
-
-        testSoundBtn.addEventListener('click', () => {
-          this.playWorkStartSound();
-        });
-      }
-
-      playWorkStartSound() {
-        this.playTone([800, 1000, 1200], [0.2, 0.2, 0.3], 'Iniciando trabajo - ¡A darle duro!');
-      }
-
-      playWorkEndSound() {
-        this.playTone([600, 500, 400], [0.3, 0.3, 0.4], '¡Trabajo completado! Tiempo de descanso');
-      }
-
-      playBreakStartSound() {
-        this.playTone([400, 500], [0.4, 0.4], 'Descanso iniciado - Relájate un poquito');
-      }
-
-      playBreakEndSound() {
-        this.playTone([500, 700, 900, 1100], [0.2, 0.2, 0.2, 0.3], '¡Descanso terminado! Listo para otro pomodoro');
-      }
-
-      playTone(frequencies, durations, message) {
-        if (!this.audioContext) return;
-
-        let startTime = this.audioContext.currentTime;
-        
-        frequencies.forEach((freq, index) => {
-          const oscillator = this.audioContext.createOscillator();
-          const gainNode = this.audioContext.createGain();
-          
-          oscillator.connect(gainNode);
-          gainNode.connect(this.audioContext.destination);
-          
-          oscillator.frequency.setValueAtTime(freq, startTime);
-          gainNode.gain.setValueAtTime(volume * 0.3, startTime);
-          gainNode.gain.exponentialRampToValueAtTime(0.01, startTime + durations[index]);
-          
-          oscillator.start(startTime);
-          oscillator.stop(startTime + durations[index]);
-          
-          startTime += durations[index] + 0.1;
-        });
-
-        console.log(`🔊 ${message}`);
-      }
-    }
-
+    /**
+     * CLASE POMODORO TIMER
+     * Esta clase es la que maneja todo el rollo del pomodoro
+     * Es como un chef que cocina el tiempo perfecto para trabajar
+     */
     class PomodoroTimer {
       constructor() {
-        this.workTime = 25 * 60; // 25 minutos
-        this.breakTime = 5 * 60; // 5 minutos
+        // Configuración de tiempos - 25 minutos trabajo, 5 descanso
+        this.workTime = 25 * 60; // 1500 segundos (25 minutos)
+        this.breakTime = 5 * 60; // 300 segundos (5 minutos)
         
+        // Estado actual del timer
         this.currentTime = this.workTime;
         this.isRunning = false;
-        this.isWorkSession = true;
-        this.timer = null;
-        this.completedPomodoros = parseInt(localStorage.getItem('pomodoroCount') || '0');
+        this.isWorkSession = true; // true = trabajo, false = descanso
+        this.timer = null; // Aquí guardamos el setInterval
         
-        this.soundManager = new SoundManager();
+        // Inicializar todo el tinglado
         this.initElements();
         this.bindEvents();
         this.updateDisplay();
         this.updatePomodoroCount();
       }
 
+      // Conectar con los elementos HTML - como enchufar cables
       initElements() {
         this.timerDisplay = document.getElementById('timerDisplay');
         this.sessionType = document.getElementById('sessionType');
@@ -625,48 +434,47 @@
         this.resetBtn = document.getElementById('resetBtn');
       }
 
+      // Conectar eventos - como poner las orejas para escuchar clicks
       bindEvents() {
         this.startBtn.addEventListener('click', () => this.start());
         this.pauseBtn.addEventListener('click', () => this.pause());
         this.resetBtn.addEventListener('click', () => this.reset());
       }
 
+      // Arrancar el timer - ¡Dale que vamos!
       start() {
         this.isRunning = true;
         this.startBtn.disabled = true;
         this.pauseBtn.disabled = false;
         
-        if (this.isWorkSession) {
-          this.soundManager.playWorkStartSound();
-        } else {
-          this.soundManager.playBreakStartSound();
-        }
-        
+        // setInterval ejecuta código cada segundo (1000ms)
         this.timer = setInterval(() => {
-          this.currentTime--;
-          this.updateDisplay();
+          this.currentTime--; // Restar un segundo
+          this.updateDisplay(); // Actualizar lo que ve el usuario
           
+          // Si llegamos a cero, completamos la sesión
           if (this.currentTime <= 0) {
             this.completeSession();
           }
         }, 1000);
       }
 
+      // Pausar - como poner en pausa Netflix
       pause() {
         this.isRunning = false;
         this.startBtn.disabled = false;
         this.pauseBtn.disabled = true;
         
-        clearInterval(this.timer);
+        clearInterval(this.timer); // Parar el contador
         this.startBtn.textContent = 'Continuar';
-        
-        this.showNotification('Pomodoro pausado - Dale play cuando estés listo');
       }
 
+      // Reiniciar todo - volver al punto de partida
       reset() {
         this.isRunning = false;
         clearInterval(this.timer);
         
+        // Volver al estado inicial
         this.isWorkSession = true;
         this.currentTime = this.workTime;
         this.startBtn.disabled = false;
@@ -674,27 +482,35 @@
         this.startBtn.textContent = 'Iniciar';
         
         this.updateDisplay();
-        this.showNotification('Pomodoro reiniciado - ¡Empecemos de nuevo!');
+        this.showNotification('Timer reiniciado - ¡Listo para un nuevo pomodoro!');
       }
 
       completeSession() {
         clearInterval(this.timer);
         this.isRunning = false;
         
+        // AQUÍ ES DONDE SUENA - solo al completar, no al iniciar
+        this.playCompletionSound();
+        
         if (this.isWorkSession) {
-          this.soundManager.playWorkEndSound();
-          this.showNotification('¡Excelente trabajo parcero! Tiempo de descanso: 5 minutos para recargar energías');
+          // Completamos trabajo, ahora descanso
+          pomodoroCount++;
+          localStorage.setItem('pomodoroCount', pomodoroCount);
+          this.updatePomodoroCount();
+          
+          this.showNotification('¡Excelente trabajo! 🎉 Tiempo de descanso: 5 minutos');
           this.isWorkSession = false;
           this.currentTime = this.breakTime;
-          this.completedPomodoros++;
-          this.updatePomodoroCount();
+          document.body.className = 'break-mode';
         } else {
-          this.soundManager.playBreakEndSound();
-          this.showNotification('¡Descanso completado! Nuevo pomodoro: 25 minutos de concentración total');
+          // Completamos descanso, nuevo trabajo
+          this.showNotification('¡Descanso completado! 💪 Nuevo pomodoro: 25 minutos');
           this.isWorkSession = true;
           this.currentTime = this.workTime;
+          document.body.className = 'work-mode';
         }
         
+        // Resetear botones
         this.startBtn.disabled = false;
         this.pauseBtn.disabled = true;
         this.startBtn.textContent = 'Iniciar';
@@ -702,42 +518,103 @@
         this.updateDisplay();
       }
 
+      // Actualizar lo que ve el usuario - la magia visual
       updateDisplay() {
         const minutes = Math.floor(this.currentTime / 60);
         const seconds = this.currentTime % 60;
         
+        // Formatear tiempo como 25:00, 04:30, etc.
         this.timerDisplay.textContent = 
           `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
         
-        this.sessionType.textContent = this.isWorkSession ? 'Trabajo - 25 minutos' : 'Descanso - 5 minutos';
+        // Cambiar texto según la sesión
+        this.sessionType.textContent = this.isWorkSession ? 
+          'Trabajo - 25 minutos' : 'Descanso - 5 minutos';
         
+        // Barra de progreso - visual feedback bacano
         const totalTime = this.isWorkSession ? this.workTime : this.breakTime;
         const progress = ((totalTime - this.currentTime) / totalTime) * 100;
         this.progressFill.style.width = `${progress}%`;
-        
-        const body = document.body;
-        if (this.isWorkSession) {
-          body.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
-        } else {
-          body.style.background = 'linear-gradient(135deg, #11998e 0%, #38ef7d 100%)';
-        }
       }
 
+      // Actualizar contador de pomodoros completados
       updatePomodoroCount() {
-        this.pomodoroCountDisplay.textContent = this.completedPomodoros;
-        localStorage.setItem('pomodoroCount', this.completedPomodoros.toString());
+        this.pomodoroCountDisplay.textContent = pomodoroCount;
       }
 
+      // Mostrar notificaciones - como WhatsApp pero en la app
       showNotification(message) {
         this.notification.textContent = message;
         this.notification.classList.add('show');
         
+        // Ocultar después de 4 segundos
         setTimeout(() => {
           this.notification.classList.remove('show');
-        }, 5000);
+        }, 4000);
+      }
+
+      playCompletionSound() {
+        try {
+          // Web Audio API - crear sonidos programáticamente
+          const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+          
+          // Crear diferentes sonidos para trabajo vs descanso
+          if (this.isWorkSession) {
+            // Sonido para completar trabajo - más energético
+            this.playWorkCompleteSound(audioContext);
+          } else {
+            // Sonido para completar descanso - más suave
+            this.playBreakCompleteSound(audioContext);
+          }
+        } catch (e) {
+          console.log('Audio no disponible en este navegador');
+        }
+      }
+
+      // Sonido al completar trabajo - energético
+      playWorkCompleteSound(audioContext) {
+        const oscillator = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+        
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+        
+        // Frecuencias que suenan bien juntas
+        oscillator.frequency.setValueAtTime(523, audioContext.currentTime); // Do
+        oscillator.frequency.setValueAtTime(659, audioContext.currentTime + 0.2); // Mi
+        oscillator.frequency.setValueAtTime(784, audioContext.currentTime + 0.4); // Sol
+        
+        gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.8);
+        
+        oscillator.start(audioContext.currentTime);
+        oscillator.stop(audioContext.currentTime + 0.8);
+      }
+
+      // Sonido al completar descanso - más relajado
+      playBreakCompleteSound(audioContext) {
+        const oscillator = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+        
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+        
+        // Sonido más suave para el descanso
+        oscillator.frequency.setValueAtTime(440, audioContext.currentTime); // La
+        oscillator.frequency.setValueAtTime(523, audioContext.currentTime + 0.3); // Do
+        
+        gainNode.gain.setValueAtTime(0.2, audioContext.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.6);
+        
+        oscillator.start(audioContext.currentTime);
+        oscillator.stop(audioContext.currentTime + 0.6);
       }
     }
 
+    /**
+     * FUNCIÓN DEL RELOJ
+     * Maneja el reloj mundial con diferentes zonas horarias
+     */
     function startClock() {
       const clockDisplay = document.getElementById('clockDisplay');
       const dateDisplay = document.getElementById('dateDisplay');
@@ -747,11 +624,13 @@
         const now = new Date();
         const timezone = timezoneSelect.value;
         
+        // Formatear hora según zona horaria
         const timeString = now.toLocaleTimeString('es-CO', {
           timeZone: timezone,
-          hour12: false
+          hour12: false // Formato 24 horas
         });
         
+        // Formatear fecha bonita
         const dateString = now.toLocaleDateString('es-CO', {
           timeZone: timezone,
           weekday: 'long',
@@ -764,28 +643,37 @@
         dateDisplay.textContent = dateString;
       }
       
+      // Actualizar inmediatamente y luego cada segundo
       updateClock();
       if (clockInterval) clearInterval(clockInterval);
       clockInterval = setInterval(updateClock, 1000);
       
+      // Escuchar cambios de zona horaria
       timezoneSelect.addEventListener('change', updateClock);
     }
 
+    /**
+     * CLASE CRONÓMETRO
+     * Para medir tiempos específicos con precisión
+     */
     class Stopwatch {
       constructor() {
-        this.time = 0;
+        this.time = 0; // Tiempo en milisegundos
         this.isRunning = false;
-        this.laps = [];
+        this.laps = []; // Array para guardar vueltas
         
+        this.initElements();
+        this.bindEvents();
+        this.updateDisplay();
+      }
+      
+      initElements() {
         this.display = document.getElementById('stopwatchDisplay');
         this.startBtn = document.getElementById('stopwatchStartBtn');
         this.pauseBtn = document.getElementById('stopwatchPauseBtn');
         this.resetBtn = document.getElementById('stopwatchResetBtn');
         this.lapBtn = document.getElementById('lapBtn');
         this.lapsContainer = document.getElementById('laps');
-        
-        this.bindEvents();
-        this.updateDisplay();
       }
       
       bindEvents() {
@@ -801,6 +689,7 @@
         this.pauseBtn.disabled = false;
         this.lapBtn.disabled = false;
         
+        // Actualizar cada 10ms para mayor precisión
         this.interval = setInterval(() => {
           this.time += 10;
           this.updateDisplay();
@@ -833,11 +722,13 @@
         this.updateLaps();
       }
       
+      // Agregar vuelta - como en las carreras
       addLap() {
         this.laps.push(this.time);
         this.updateLaps();
       }
       
+      // Mostrar tiempo con centésimas de segundo
       updateDisplay() {
         const minutes = Math.floor(this.time / 60000);
         const seconds = Math.floor((this.time % 60000) / 1000);
@@ -847,6 +738,7 @@
           `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}:${centiseconds.toString().padStart(2, '0')}`;
       }
       
+      // Mostrar lista de vueltas
       updateLaps() {
         this.lapsContainer.innerHTML = '';
         this.laps.forEach((lapTime, index) => {
@@ -864,11 +756,15 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
+      // Crear instancias de las clases - como construir las herramientas
       pomodoroTimer = new PomodoroTimer();
       const stopwatch = new Stopwatch();
+      
+      // Arrancar el reloj
       startClock();
       
-      showTool('all');
+      // Mostrar contador inicial
+      document.getElementById('pomodoroCount').textContent = pomodoroCount;
     });
   </script>
 </body>
